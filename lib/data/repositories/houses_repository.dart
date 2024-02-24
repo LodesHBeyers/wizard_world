@@ -5,11 +5,22 @@ import 'package:wizard_world/services/network/app_dio.dart';
 
 class HousesRepository {
   final APIClient _apiClient;
-  const HousesRepository(
+  HousesRepository(
     this._apiClient,
   );
 
-  Future<List<House>> getAllHouses() => _apiClient.fetchHouses();
+  final List<House> _cache = <House>[];
+
+  Future<List<House>> getAllHouses() async {
+    if (_cache.isNotEmpty) {
+      return _cache;
+    }
+    final List<House> allHouses = await _apiClient.fetchHouses();
+    _cache.addAll(
+      allHouses,
+    );
+    return allHouses;
+  }
 
   Future<House> getHouse(
     String id,
