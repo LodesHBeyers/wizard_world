@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wizard_world/services/theme/app_theme.dart';
+import 'package:wizard_world/data/entities/house.dart';
+import 'package:wizard_world/data/notifiers/current_house_notifier.dart';
+import 'package:wizard_world/globals/globals_keys.dart';
+import 'package:wizard_world/services/routing/app_router.dart';
+import 'package:wizard_world/services/routing/app_routes.dart';
+import 'package:wizard_world/theme/app_themes.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends ConsumerWidget {
@@ -11,13 +20,16 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final House currentHouse = ref.watch(currentHouseProvider);
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ref.read(themeDataProvider),
-      home: Scaffold(
-        appBar: AppBar(),
-        body: const Placeholder(),
+      title: 'Wizard World',
+      navigatorKey: globalNavigatorKey,
+      theme: AppTheme.buildTheme(
+        currentHouse,
       ),
+      onGenerateRoute: AppRouter.onGenerateRoute,
+      onUnknownRoute: AppRouter.onUnknownRoute,
+      initialRoute: AppRoutes.landing,
     );
   }
 }
