@@ -11,9 +11,9 @@ class HousesNotifier extends AsyncNotifier<List<House>> {
   }
 
   Future<List<House>> loadHouses() async {
-    try{
+    try {
       return ref.read(housesRepositoryProvider).getAllHouses();
-    }catch(e,s){
+    } catch (e, s) {
       rethrow;
     }
   }

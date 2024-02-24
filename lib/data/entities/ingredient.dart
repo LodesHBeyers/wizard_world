@@ -14,7 +14,7 @@ class Ingredient {
     );
   }
 
-  String toJson () => id;
+  String toJson() => id;
 }
 
 /*
