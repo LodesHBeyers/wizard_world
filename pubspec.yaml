@@ -33,6 +33,7 @@ flutter:
   assets:
     - assets/images/
     - assets/animations/
+    - assets/icons/
 
   fonts:
     - family: EduTAS
@@ -41,3 +42,7 @@ flutter:
         - asset: fonts/EduTASBeginner-Medium.ttf
         - asset: fonts/EduTASBeginner-Regular.ttf
         - asset: fonts/EduTASBeginner-SemiBold.ttf
+        - asset: fonts/magic_school_two.ttf
+    - family: MagicSchool
+      fonts:
+        - asset: fonts/magic_school_two.ttf
