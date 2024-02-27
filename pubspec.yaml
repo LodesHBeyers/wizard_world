@@ -23,9 +23,9 @@ dev_dependencies:
     sdk: flutter
   retrofit: ^4.1.0
   freezed: ^2.4.7
-
-  flutter_lints: ^2.0.0
   build_runner: ^2.4.8
+  freezed_annotation: ^2.4.1
+  flutter_lints: ^2.0.0
 
 flutter:
   uses-material-design: true
