@@ -27,15 +27,15 @@ class AppRouter {
     );
   }
 
-  static MaterialPageRoute<UnknownRoute> _home(RouteSettings settings) {
-    return MaterialPageRoute<UnknownRoute>(
-      builder: (BuildContext context) => const HomeScreen(),
-    );
-  }
-
   static MaterialPageRoute<UnknownRoute> _landing(RouteSettings settings) {
     return MaterialPageRoute<UnknownRoute>(
       builder: (BuildContext context) => const LandingScreen(),
+    );
+  }
+
+  static MaterialPageRoute<UnknownRoute> _home(RouteSettings settings) {
+    return MaterialPageRoute<UnknownRoute>(
+      builder: (BuildContext context) => const HomeScreen(),
     );
   }
 }
