@@ -5,7 +5,7 @@ class HufflepuffTheme extends HouseTheme {
   @override
 
   /// Yellow
-  Color get primary => const Color(0xffFFFF00);
+  Color get primary => const Color.fromARGB(255, 175, 161, 0);
 
   @override
 
@@ -13,11 +13,11 @@ class HufflepuffTheme extends HouseTheme {
   Color get secondary => const Color(0xff000000);
 
   @override
-  Color get accent1 => Colors.white;
+  Color get accent1 => const Color.fromARGB(255, 65, 65, 65);
 
   @override
-  Color get accent2 => Colors.white;
+  Color get accent2 => const Color.fromARGB(255, 141, 141, 141);
 
   @override
-  Color get accent3 => Colors.white;
+  Color get accent3 => const Color.fromARGB(255, 197, 197, 197);
 }

@@ -5,7 +5,7 @@ class SlytherinTheme extends HouseTheme {
   @override
 
   /// Green
-  Color get primary => const Color(0xff008000);
+  Color get primary => const Color.fromARGB(255, 0, 145, 0);
 
   @override
 
@@ -13,11 +13,11 @@ class SlytherinTheme extends HouseTheme {
   Color get secondary => const Color(0xffC0C0C0);
 
   @override
-  Color get accent1 => Colors.white;
+  Color get accent1 => const Color(0xffC0C0C0);
 
   @override
-  Color get accent2 => Colors.white;
+  Color get accent2 => const Color(0xffC0C0C0);
 
   @override
-  Color get accent3 => Colors.white;
+  Color get accent3 => const Color(0xffC0C0C0);
 }
