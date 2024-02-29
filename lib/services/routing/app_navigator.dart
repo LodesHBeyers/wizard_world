@@ -11,4 +11,15 @@ class AppNavigator {
       arguments: args,
     );
   }
+
+  static Future<void> replaceWithNamed(
+    BuildContext context,
+    String routeName, {
+    Object? args,
+  }) {
+    return Navigator.of(context).pushReplacementNamed(
+      routeName,
+      arguments: args,
+    );
+  }
 }
