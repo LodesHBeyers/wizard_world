@@ -5,7 +5,6 @@ import 'package:wizard_world/data/notifiers/houses/current_house_notifier.dart';
 import 'package:wizard_world/globals/globals_keys.dart';
 import 'package:wizard_world/services/routing/app_router.dart';
 import 'package:wizard_world/services/routing/app_routes.dart';
-import 'package:wizard_world/theme/app_themes.dart';
 
 void main() {
   runApp(
@@ -15,21 +14,18 @@ void main() {
   );
 }
 
-class MyApp extends ConsumerWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final House currentHouse = ref.watch(currentHouseProvider);
+  Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Wizard World',
       navigatorKey: globalNavigatorKey,
-      theme: AppTheme.fromHouse(
-        currentHouse,
-      ),
+      theme: ThemeData(),
       onGenerateRoute: AppRouter.onGenerateRoute,
       onUnknownRoute: AppRouter.onUnknownRoute,
-      initialRoute: AppRoutes.landing,
+      initialRoute: AppRoutes.home,
     );
   }
 }

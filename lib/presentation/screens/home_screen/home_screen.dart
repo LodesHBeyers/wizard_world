@@ -1,8 +1,8 @@
+
 import 'package:flutter/material.dart';
 
-// TODO [LB]
-class LandingScreen extends StatelessWidget {
-  const LandingScreen({super.key});
+class HomeScreen extends StatelessWidget{
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
