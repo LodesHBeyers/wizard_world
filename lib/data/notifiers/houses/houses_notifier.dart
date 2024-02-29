@@ -3,8 +3,9 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wizard_world/data/entities/house.dart';
 import 'package:wizard_world/data/repositories/houses_repository.dart';
+import 'package:wizard_world/services/exceptions/exception_handler.dart';
 
-class HousesNotifier extends AsyncNotifier<List<House>> {
+class HousesNotifier extends AsyncNotifier<List<House>> with ExceptionHandler {
   @override
   FutureOr<List<House>> build() {
     return loadHouses();
@@ -14,6 +15,7 @@ class HousesNotifier extends AsyncNotifier<List<House>> {
     try {
       return ref.read(housesRepositoryProvider).getAllHouses();
     } catch (e, s) {
+      handleException(e, s);
       rethrow;
     }
   }

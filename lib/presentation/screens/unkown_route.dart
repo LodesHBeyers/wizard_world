@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-// TODO [LB]
 class UnknownRoute extends StatelessWidget {
   const UnknownRoute({super.key});
 

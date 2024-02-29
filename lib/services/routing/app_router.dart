@@ -1,9 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:wizard_world/presentation/screens/elixirs/elixirs_screen.dart';
+import 'package:wizard_world/presentation/screens/home/home_screen.dart';
+import 'package:wizard_world/presentation/screens/houses/houses_screen.dart';
+import 'package:wizard_world/presentation/screens/spells/spells_screen.dart';
 import 'package:wizard_world/presentation/screens/unkown_route.dart';
+import 'package:wizard_world/presentation/screens/wizards/wizards_screen.dart';
+import 'package:wizard_world/services/routing/app_routes.dart';
 
 class AppRouter {
   static MaterialPageRoute<Widget> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case AppRoutes.home:
+        return _home(settings);
+      case AppRoutes.houses:
+        return _houses(settings);
+      case AppRoutes.wizards:
+        return _wizards(settings);
+      case AppRoutes.spells:
+        return _spells(settings);
+      case AppRoutes.elixirs:
+        return _elixirs(settings);
       default:
         return _unkownRoute(settings);
     }
@@ -19,4 +35,29 @@ class AppRouter {
       builder: (BuildContext context) => const UnknownRoute(),
     );
   }
+
+  static MaterialPageRoute<Widget> _home(RouteSettings settings) =>
+      MaterialPageRoute<UnknownRoute>(
+        builder: (BuildContext context) => const HomeScreen(),
+      );
+
+  static MaterialPageRoute<Widget> _houses(RouteSettings settings) =>
+      MaterialPageRoute<UnknownRoute>(
+        builder: (BuildContext context) => const HousesScreen(),
+      );
+
+  static MaterialPageRoute<Widget> _wizards(RouteSettings settings) =>
+      MaterialPageRoute<UnknownRoute>(
+        builder: (BuildContext context) => const WizardsScreen(),
+      );
+
+  static MaterialPageRoute<Widget> _elixirs(RouteSettings settings) =>
+      MaterialPageRoute<UnknownRoute>(
+        builder: (BuildContext context) => const ElixirsScreen(),
+      );
+
+  static MaterialPageRoute<Widget> _spells(RouteSettings settings) =>
+      MaterialPageRoute<UnknownRoute>(
+        builder: (BuildContext context) => const SpellsScreen(),
+      );
 }
