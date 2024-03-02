@@ -24,10 +24,14 @@ class HousesRepository {
 
   Future<House> getHouse(
     String id,
-  ) =>
-      _apiClient.fetchHouse(
-        id: id,
-      );
+  ) async {
+    if (_cache.isNotEmpty && _cache.any((House element) => element.id == id)) {
+      return _cache.firstWhere((House element) => element.id == id);
+    }
+    return _apiClient.fetchHouse(
+      id: id,
+    );
+  }
 }
 
 final Provider<HousesRepository> housesRepositoryProvider =
