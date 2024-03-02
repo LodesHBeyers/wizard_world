@@ -9,7 +9,6 @@ class StyledAppBar extends AppBar {
     super.actions,
   }) : super(
           elevation: 1,
-          shadowColor: const Color.fromARGB(255, 0, 50, 92),
         );
 
   StyledAppBar.centered({
@@ -18,7 +17,6 @@ class StyledAppBar extends AppBar {
   }) : super(
           centerTitle: true,
           elevation: 1,
-          shadowColor: const Color.fromARGB(255, 0, 50, 92),
         );
 
   @override
