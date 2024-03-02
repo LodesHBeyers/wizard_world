@@ -79,7 +79,7 @@ class HouseScreen extends ConsumerWidget {
                             ),
                             Divider(
                               color: house.houseColor,
-                              height: AppSizes.xxl,
+                              height: AppSizes.s,
                             ),
                             Text(
                               "Traits:",
