@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wizard_world/presentation/components/app_bar/styled_app_bar.dart';
 import 'package:wizard_world/presentation/screens/home/widgets/home_navigation_card.dart';
+import 'package:wizard_world/utils/app_sizes.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -12,11 +13,16 @@ class HomeScreen extends StatelessWidget {
         heading: "Home",
       ),
       body: SafeArea(
-        child: PageView(
-          controller: PageController(
-            viewportFraction: .8
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: AppSizes.xxl,
           ),
-          children: HomeNavigationCard.cards,
+          child: PageView(
+            controller: PageController(
+              viewportFraction: .8,
+            ),
+            children: HomeNavigationCard.cards,
+          ),
         ),
       ),
     );

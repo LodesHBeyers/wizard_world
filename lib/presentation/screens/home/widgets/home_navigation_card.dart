@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:wizard_world/presentation/components/assets/app_fonts.dart';
+import 'package:wizard_world/presentation/components/assets/app_icons.dart';
 import 'package:wizard_world/services/routing/app_navigator.dart';
 import 'package:wizard_world/services/routing/app_routes.dart';
 import 'package:wizard_world/utils/app_sizes.dart';
 
 class HomeNavigationCard extends StatelessWidget {
-  final Color _borderColor;
   final String _title;
   final String _imagePath;
   final String _routeName;
@@ -18,36 +18,32 @@ class HomeNavigationCard extends StatelessWidget {
       ];
 
   const HomeNavigationCard.houses()
-      : _borderColor = Colors.blue,
-        _title = "Houses",
-        _imagePath = "",
+      : _title = "Houses",
+        _imagePath = AppIcons.castle_filled,
         _routeName = AppRoutes.houses,
         super(
           key: const Key(""),
         );
 
   const HomeNavigationCard.elixirs()
-      : _borderColor = Colors.orange,
-        _title = "Elixirs",
-        _imagePath = "",
+      : _title = "Elixirs",
+        _imagePath = AppIcons.potion_filled,
         _routeName = AppRoutes.elixirs,
         super(
           key: const Key(""),
         );
 
   const HomeNavigationCard.spells()
-      : _borderColor = Colors.purple,
-        _title = "Spells",
-        _imagePath = "",
+      : _title = "Spells",
+        _imagePath = AppIcons.magic_wand_filled,
         _routeName = AppRoutes.spells,
         super(
           key: const Key(""),
         );
 
   const HomeNavigationCard.wizards()
-      : _borderColor = Colors.green,
-        _title = "Witches & Wizards",
-        _imagePath = "",
+      : _title = "Witches & Wizards",
+        _imagePath = AppIcons.wizard_hat_filled,
         _routeName = AppRoutes.wizards,
         super(
           key: const Key(""),
@@ -55,42 +51,105 @@ class HomeNavigationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: InkWell(
-        splashColor: _borderColor,
-        onTap: () {
-          AppNavigator.toNamed(
-            context,
-            _routeName,
-          );
-        },
-        child: Container(
-          width: AppSizes.sw(context) * .7,
-          height: AppSizes.sh(context) * .7,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(
-              AppSizes.s,
-            ),
-            border: Border.all(
-              color: _borderColor,
-              width: 1.5,
-            ),
-          ),
-          padding: const EdgeInsets.all(
-            AppSizes.s,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                _title,
-                style: TextStyle(
-                  fontFamily: AppFonts.magicSchool,
-                  fontSize: 44,
+    return InkWell(
+      onTap: () {
+        AppNavigator.pushNamed(
+          context,
+          _routeName,
+        );
+      },
+      child: Card(
+        margin: const EdgeInsets.symmetric(
+          horizontal: AppSizes.xs,
+        ),
+        clipBehavior: Clip.hardEdge,
+        child: Stack(
+          children: [
+            Positioned(
+              top: -45,
+              left: -25,
+              child: Container(
+                width: 250,
+                height: 250,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                  shape: BoxShape.circle,
                 ),
               ),
-            ],
-          ),
+            ),
+            Positioned(
+              right: 0,
+              top: 150,
+              child: Container(
+                width: AppSizes.l,
+                height: AppSizes.l,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                  shape: BoxShape.circle,
+                ),
+              ),
+            ),
+            Positioned(
+              right: 20,
+              top: 180,
+              child: Container(
+                width: AppSizes.s,
+                height: AppSizes.s,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                  shape: BoxShape.circle,
+                ),
+              ),
+            ),
+            Positioned(
+              right: 30,
+              top: 210,
+              child: Container(
+                width: AppSizes.xs,
+                height: AppSizes.xs,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                  shape: BoxShape.circle,
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: -45,
+              left: -25,
+              child: Container(
+                width: 120,
+                height: 120,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                  shape: BoxShape.circle,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(
+                AppSizes.s,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    _title,
+                    style: const TextStyle(
+                      fontFamily: AppFonts.magicSchool,
+                      fontSize: 44,
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: Image.asset(
+                      _imagePath,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
