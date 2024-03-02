@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppNavigator {
-  static Future<void> toNamed(
+  static Future<void> pushNamed(
     BuildContext context,
     String routeName, {
     Object? args,

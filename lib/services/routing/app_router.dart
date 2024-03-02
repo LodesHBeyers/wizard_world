@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:wizard_world/data/entities/house.dart';
+import 'package:wizard_world/data/entities/wizard.dart';
 import 'package:wizard_world/presentation/screens/elixirs/elixirs_screen.dart';
 import 'package:wizard_world/presentation/screens/home/home_screen.dart';
+import 'package:wizard_world/presentation/screens/house/house_screen.dart';
 import 'package:wizard_world/presentation/screens/houses/houses_screen.dart';
 import 'package:wizard_world/presentation/screens/spells/spells_screen.dart';
 import 'package:wizard_world/presentation/screens/unkown_route.dart';
+import 'package:wizard_world/presentation/screens/wizard/wizard_screen.dart';
 import 'package:wizard_world/presentation/screens/wizards/wizards_screen.dart';
 import 'package:wizard_world/services/routing/app_routes.dart';
 
@@ -20,6 +24,10 @@ class AppRouter {
         return _spells(settings);
       case AppRoutes.elixirs:
         return _elixirs(settings);
+      case AppRoutes.house:
+        return _house(settings);
+      case AppRoutes.wizard:
+        return _wizard(settings);
       default:
         return _unkownRoute(settings);
     }
@@ -59,5 +67,19 @@ class AppRouter {
   static MaterialPageRoute<Widget> _spells(RouteSettings settings) =>
       MaterialPageRoute<UnknownRoute>(
         builder: (BuildContext context) => const SpellsScreen(),
+      );
+
+  static MaterialPageRoute<Widget> _house(RouteSettings settings) =>
+      MaterialPageRoute<UnknownRoute>(
+        builder: (BuildContext context) => HouseScreen(
+          house: settings.arguments as House,
+        ),
+      );
+
+  static MaterialPageRoute<Widget> _wizard(RouteSettings settings) =>
+      MaterialPageRoute<UnknownRoute>(
+        builder: (BuildContext context) => WizardScreen(
+          wizard: settings.arguments as Wizard,
+        ),
       );
 }
