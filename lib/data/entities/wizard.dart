@@ -26,6 +26,8 @@ class Wizard {
       lastName: json["lastName"] ?? "",
     );
   }
+
+  String get fullName => "$firstName $lastName";
 }
 
 /*
