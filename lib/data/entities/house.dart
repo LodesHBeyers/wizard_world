@@ -1,5 +1,6 @@
 import 'package:wizard_world/data/entities/trait.dart';
 import 'package:wizard_world/data/entities/wizard.dart';
+import 'package:wizard_world/data/enums/house_element.dart';
 
 class House {
   final String id;
@@ -7,7 +8,7 @@ class House {
   final String houseColours;
   final String founder;
   final String animal;
-  final String element;
+  final HouseElement element;
   final String ghost;
   final String commonRoom;
   final List<Wizard> heads;
@@ -26,19 +27,6 @@ class House {
     required this.traits,
   });
 
-  const House.undetermined({
-    this.id = "",
-    this.name = "",
-    this.houseColours = "",
-    this.founder = "",
-    this.animal = "",
-    this.element = "",
-    this.ghost = "",
-    this.commonRoom = "",
-    this.heads = const <Wizard>[],
-    this.traits = const <Trait>[],
-  });
-
   factory House.fromJson(Map<String, dynamic> json) {
     return House(
       id: json["id"],
@@ -46,7 +34,7 @@ class House {
       houseColours: json["houseColours"],
       founder: json["founder"],
       animal: json["animal"],
-      element: json["element"],
+      element: HouseElement.parse(json["element"]),
       ghost: json["ghost"],
       commonRoom: json["commonRoom"],
       heads: <Wizard>[
