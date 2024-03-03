@@ -90,7 +90,7 @@ class AppRouter {
   static MaterialPageRoute<Widget> _elixir(RouteSettings settings) =>
       MaterialPageRoute<UnknownRoute>(
         builder: (BuildContext context) => ElixirScreen(
-          elixir: settings.arguments as Elixir,
+          id: settings.arguments as String,
         ),
       );
 }
