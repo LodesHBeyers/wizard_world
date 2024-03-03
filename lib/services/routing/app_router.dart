@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:wizard_world/data/entities/elixir.dart';
 import 'package:wizard_world/data/entities/house.dart';
 import 'package:wizard_world/data/entities/wizard.dart';
 import 'package:wizard_world/presentation/screens/elixir/elixir_screen.dart';
