@@ -22,4 +22,8 @@ class AppNavigator {
       arguments: args,
     );
   }
+
+  static void pop(BuildContext context){
+    return Navigator.of(context).pop();
+  }
 }
