@@ -35,7 +35,7 @@ class Elixir {
       sideEffects: json["sideEffects"] ?? "",
       characteristics: json["characteristics"] ?? "",
       time: json["time"] ?? "",
-      difficulty: ElixirDifficulty.parse(json["difficulty"]),
+      difficulty: ElixirDifficulty.parse(json["difficulty"] ?? ""),
       ingredients: <Ingredient>[
         for (Map<String, dynamic> ingredientJson in json["ingredients"] ?? [])
           Ingredient.fromJson(
@@ -43,7 +43,7 @@ class Elixir {
           ),
       ],
       inventors: <Wizard>[
-        for (Map<String, dynamic> inventorJson in json["inventors"])
+        for (Map<String, dynamic> inventorJson in json["inventors"] ?? [])
           Wizard.fromJson(inventorJson),
       ],
       manufacturer: json["manufacturer"] ?? "",
