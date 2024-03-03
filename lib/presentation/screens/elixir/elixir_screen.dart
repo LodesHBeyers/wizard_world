@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wizard_world/data/entities/elixir.dart';
 import 'package:wizard_world/data/notifiers/elixirs/elixir_notifier.dart';
 import 'package:wizard_world/presentation/components/app_bar/styled_app_bar.dart';
+import 'package:wizard_world/presentation/components/error_container.dart';
 import 'package:wizard_world/presentation/components/loaders/animated_loader.dart';
 import 'package:wizard_world/presentation/screens/elixir/widgets/elixir_duration.dart';
 import 'package:wizard_world/presentation/screens/elixir/widgets/elixir_header.dart';
@@ -132,7 +133,14 @@ class ElixirScreen extends ConsumerWidget {
               ),
             ),
           ),
-          error: (_, __) => const Text("Error"),
+          error: (_, __) => ErrorContainer(
+            text: "Blimey! Something went wrong fetching the elixir.",
+            onRetry: () {
+              ref.invalidate(
+                elixirProvider(id),
+              );
+            },
+          ),
           loading: () => const Center(
             child: AnimatedLoader(),
           ),

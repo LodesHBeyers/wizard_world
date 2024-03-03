@@ -19,6 +19,13 @@ class HousesNotifier extends AsyncNotifier<List<House>> with ExceptionHandler {
       rethrow;
     }
   }
+
+  void refresh() async {
+    state = const AsyncLoading<List<House>>();
+    state = await AsyncValue.guard(
+      () => loadHouses(),
+    );
+  }
 }
 
 final AsyncNotifierProvider<HousesNotifier, List<House>> housesProvider =

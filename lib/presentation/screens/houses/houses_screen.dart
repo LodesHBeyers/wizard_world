@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wizard_world/data/entities/house.dart';
 import 'package:wizard_world/data/notifiers/houses/houses_notifier.dart';
 import 'package:wizard_world/presentation/components/app_bar/styled_app_bar.dart';
+import 'package:wizard_world/presentation/components/error_container.dart';
 import 'package:wizard_world/presentation/components/loaders/animated_loader.dart';
 import 'package:wizard_world/presentation/screens/houses/widgets/house_card.dart';
 import 'package:wizard_world/utils/app_sizes.dart';
@@ -57,7 +58,12 @@ class HousesScreen extends ConsumerWidget {
                 ),
               ),
             ),
-            error: (Object e, StackTrace s) => const Text("ERROR"),
+            error: (Object e, StackTrace s) => ErrorContainer(
+              text: "Blimey! Something went wrong fetches the houses.",
+              onRetry: () {
+                ref.read(housesProvider.notifier).refresh();
+              },
+            ),
             loading: () => const Center(
               child: AnimatedLoader(),
             ),
