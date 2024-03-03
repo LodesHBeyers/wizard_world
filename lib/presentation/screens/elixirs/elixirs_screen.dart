@@ -4,7 +4,6 @@ import 'package:wizard_world/data/entities/elixir.dart';
 import 'package:wizard_world/data/notifiers/elixirs/elixir_filter_notifier.dart';
 import 'package:wizard_world/data/notifiers/elixirs/elixirs_notifier.dart';
 import 'package:wizard_world/presentation/components/app_bar/styled_app_bar.dart';
-import 'package:wizard_world/presentation/components/assets/app_icons.dart';
 import 'package:wizard_world/presentation/components/error_container.dart';
 import 'package:wizard_world/presentation/components/loaders/animated_loader.dart';
 import 'package:wizard_world/presentation/components/not_found_container.dart';

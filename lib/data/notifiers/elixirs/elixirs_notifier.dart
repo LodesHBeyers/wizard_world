@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wizard_world/data/entities/elixir.dart';
 import 'package:wizard_world/data/entities/elixir_filter_params.dart';
