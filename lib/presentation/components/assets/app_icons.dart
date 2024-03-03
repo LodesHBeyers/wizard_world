@@ -16,4 +16,5 @@ class AppIcons{
   static const String eagle = "assets/icons/ic_eagle.png";
   static const String ghost = "assets/icons/ic_ghost.png";
   static const String couch = "assets/icons/ic_couch.png";
+  static const String cauldron_filled = "assets/icons/ic_cauldron_filled.png";
 }
