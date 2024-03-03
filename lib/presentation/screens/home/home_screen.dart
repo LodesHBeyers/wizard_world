@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wizard_world/data/notifiers/theme/theme_notifier.dart';
 import 'package:wizard_world/presentation/components/app_bar/styled_app_bar.dart';
 import 'package:wizard_world/presentation/screens/home/widgets/home_drawer.dart';
 import 'package:wizard_world/presentation/screens/home/widgets/home_navigation_card.dart';
