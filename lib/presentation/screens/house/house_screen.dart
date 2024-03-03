@@ -72,7 +72,7 @@ class HouseScreen extends ConsumerWidget {
                               houseColors: house.houseColours,
                               houseColorsArray: house.houseColorsArray,
                               animal: house.animal,
-                              animalImagePath: house.animalImagePath,
+                              animalIcon: house.animalIcon,
                               element: house.element,
                               ghost: house.ghost,
                               commonRoom: house.commonRoom,

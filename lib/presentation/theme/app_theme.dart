@@ -10,10 +10,10 @@ class AppTheme {
       ).copyWith(
         appBarTheme: AppBarTheme(
           color: lightColorScheme.inversePrimary,
-          titleTextStyle: const TextStyle(
+          titleTextStyle: TextStyle(
             fontSize: 32,
             fontFamily: AppFonts.magicSchool,
-            color: Color.fromARGB(255, 31, 31, 31),
+            color: lightColorScheme.inverseSurface,
           ),
         ),
       );
@@ -23,11 +23,11 @@ class AppTheme {
         fontFamily: AppFonts.eduTAS,
         colorScheme: darkColorScheme,
       ).copyWith(
-        appBarTheme: const AppBarTheme(
+        appBarTheme: AppBarTheme(
           titleTextStyle: TextStyle(
             fontSize: 32,
             fontFamily: AppFonts.magicSchool,
-            color: Color.fromARGB(255, 31, 31, 31),
+            color: darkColorScheme.inversePrimary,
           ),
         ),
       );

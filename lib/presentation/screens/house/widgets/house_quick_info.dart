@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:wizard_world/data/enums/house_element.dart';
-import 'package:wizard_world/presentation/components/assets/app_icons.dart';
+import 'package:wizard_world/presentation/components/app_icon.dart';
 import 'package:wizard_world/utils/app_sizes.dart';
 
 class HouseQuickInfo extends StatelessWidget {
   final String houseColors;
   final List<Color> houseColorsArray;
   final String animal;
-  final String animalImagePath;
+  final Widget animalIcon;
   final HouseElement element;
   final String ghost;
   final String commonRoom;
@@ -17,7 +17,7 @@ class HouseQuickInfo extends StatelessWidget {
     required this.houseColors,
     required this.houseColorsArray,
     required this.animal,
-    required this.animalImagePath,
+    required this.animalIcon,
     required this.element,
     required this.ghost,
     required this.commonRoom,
@@ -31,22 +31,22 @@ class HouseQuickInfo extends StatelessWidget {
         _InfoElement(
           label: "Animal:",
           value: animal,
-          imagePath: animalImagePath,
+          icon: animalIcon,
         ),
         _InfoElement(
           label: "Element:",
           value: element.name,
-          imagePath: element.imagePath,
+          icon: element.icon,
         ),
         _InfoElement(
           label: "Ghost:",
           value: ghost,
-          imagePath: AppIcons.ghost,
+          icon: const AppIcon.ghost(),
         ),
         _InfoElement(
           label: "Common room:",
           value: commonRoom,
-          imagePath: AppIcons.couch,
+          icon: const AppIcon.couch(),
         ),
         const SizedBox(
           height: AppSizes.m,
@@ -70,8 +70,7 @@ class HouseQuickInfo extends StatelessWidget {
             ),
             gradient: LinearGradient(
               colors: [
-                for(Color color in houseColorsArray)
-                color.withOpacity(.8)
+                for (Color color in houseColorsArray) color.withOpacity(.8)
               ],
               stops: const <double>[
                 0,
@@ -100,12 +99,12 @@ class HouseQuickInfo extends StatelessWidget {
 class _InfoElement extends StatelessWidget {
   final String label;
   final String value;
-  final String imagePath;
+  final Widget icon;
 
   const _InfoElement({
     required this.label,
     required this.value,
-    required this.imagePath,
+    required this.icon,
   });
 
   @override
@@ -138,11 +137,11 @@ class _InfoElement extends StatelessWidget {
               const SizedBox(
                 width: AppSizes.xs,
               ),
-              if (imagePath.isNotEmpty)
-                Image.asset(
-                  imagePath,
-                  height: AppSizes.m,
-                ),
+              SizedBox(
+                width: AppSizes.m,
+                height: AppSizes.m,
+                child: icon,
+              )
             ],
           ),
         ],

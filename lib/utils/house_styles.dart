@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:wizard_world/data/entities/house.dart';
-import 'package:wizard_world/presentation/components/assets/app_icons.dart';
+import 'package:wizard_world/presentation/components/app_icon.dart';
 import 'package:wizard_world/presentation/components/assets/app_images.dart';
 
 extension HouseStyles on House {
@@ -70,16 +70,16 @@ extension HouseStyles on House {
     }
   }
 
-  String get animalImagePath {
+  AppIcon get animalIcon {
     switch (name) {
       case "Gryffindor":
-        return AppIcons.lion;
+        return const AppIcon.lion();
       case "Slytherin":
-        return AppIcons.serpent;
+        return const AppIcon.serpent();
       case "Hufflepuff":
-        return AppIcons.badger;
+        return const AppIcon.badger();
       case "Ravenclaw":
-        return AppIcons.eagle;
+        return const AppIcon.eagle();
       default:
         throw UnimplementedError();
     }

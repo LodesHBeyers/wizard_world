@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wizard_world/presentation/components/assets/app_icons.dart';
+import 'package:wizard_world/presentation/components/app_icon.dart';
 import 'package:wizard_world/utils/app_sizes.dart';
 
 class NotFoundContainer extends StatelessWidget {
@@ -14,9 +14,7 @@ class NotFoundContainer extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.asset(
-          AppIcons.emptyMagnifyingGlass,
-        ),
+        const AppIcon.emptyMagnifyingGlass(),
         Padding(
           padding: const EdgeInsets.only(
             top: AppSizes.l,

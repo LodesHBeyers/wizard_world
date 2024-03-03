@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wizard_world/presentation/components/assets/app_icons.dart';
+import 'package:wizard_world/presentation/components/app_icon.dart';
 import 'package:wizard_world/utils/app_sizes.dart';
 
 class ErrorContainer extends StatelessWidget {
@@ -17,9 +17,7 @@ class ErrorContainer extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.asset(
-          AppIcons.ghost,
-        ),
+        const AppIcon.ghost(),
         Padding(
           padding: const EdgeInsets.only(
             top: AppSizes.l,
@@ -37,11 +35,11 @@ class ErrorContainer extends StatelessWidget {
           child: Text(
             "RETRY",
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              fontWeight: FontWeight.bold,
-              letterSpacing: .75,
-              color: Theme.of(context).colorScheme.primary,
-              decoration: TextDecoration.underline,
-            ),
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: .75,
+                  color: Theme.of(context).colorScheme.primary,
+                  decoration: TextDecoration.underline,
+                ),
           ),
         ),
       ],

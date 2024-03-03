@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wizard_world/presentation/components/assets/app_icons.dart';
+import 'package:wizard_world/presentation/components/app_icon.dart';
 import 'package:wizard_world/utils/app_sizes.dart';
 
 class ElixirHeader extends StatelessWidget {
@@ -16,10 +16,8 @@ class ElixirHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        Image.asset(
-          AppIcons.cauldron_filled,
-          width: 100,
-          height: 100,
+        const AppIcon.cauldronFilled(
+          size: 100,
         ),
         const SizedBox(
           width: AppSizes.s,

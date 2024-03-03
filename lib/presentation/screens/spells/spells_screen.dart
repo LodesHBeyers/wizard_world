@@ -58,19 +58,6 @@ class SpellsScreen extends ConsumerWidget {
               textAlign: TextAlign.center,
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: AppSizes.s,
-            ),
-            child: Row(
-              children: <Widget>[
-                Text(
-                  "Filter by",
-                ),
-                SpellsFilterButton(),
-              ],
-            ),
-          ),
           ref.watch(spellsProvider(ref.watch(spellTypeFilterProvider))).when(
                 data: (
                   List<Spell> spells,
@@ -78,6 +65,19 @@ class SpellsScreen extends ConsumerWidget {
                   return Expanded(
                     child: Column(
                       children: <Widget>[
+                        const Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: AppSizes.s,
+                          ),
+                          child: Row(
+                            children: <Widget>[
+                              Text(
+                                "Filter by",
+                              ),
+                              SpellsFilterButton(),
+                            ],
+                          ),
+                        ),
                         Divider(
                           color: Theme.of(context).colorScheme.inversePrimary,
                           height: 1,

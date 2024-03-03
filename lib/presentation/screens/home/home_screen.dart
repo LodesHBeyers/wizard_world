@@ -14,17 +14,19 @@ class HomeScreen extends StatelessWidget {
       endDrawer: const HomeDrawer(),
       appBar: StyledAppBar(
         heading: "Home",
-        actions: [
-          Builder(builder: (BuildContext scaffoldContext) {
-            return IconButton(
-              onPressed: () {
-                AppNavigator.openEndDrawer(scaffoldContext);
-              },
-              icon: const Icon(
-                Icons.settings,
-              ),
-            );
-          })
+        actions: <Widget>[
+          Builder(
+            builder: (BuildContext scaffoldContext) {
+              return IconButton(
+                onPressed: () {
+                  AppNavigator.openEndDrawer(scaffoldContext);
+                },
+                icon: const Icon(
+                  Icons.settings,
+                ),
+              );
+            },
+          )
         ],
       ),
       body: SafeArea(

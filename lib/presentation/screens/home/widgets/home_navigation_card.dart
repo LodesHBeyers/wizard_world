@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:wizard_world/presentation/components/app_icon.dart';
 import 'package:wizard_world/presentation/components/assets/app_fonts.dart';
-import 'package:wizard_world/presentation/components/assets/app_icons.dart';
 import 'package:wizard_world/services/routing/app_navigator.dart';
 import 'package:wizard_world/services/routing/app_routes.dart';
 import 'package:wizard_world/utils/app_sizes.dart';
 
 class HomeNavigationCard extends StatelessWidget {
   final String _title;
-  final String _imagePath;
+  final AppIcon _icon;
   final String _routeName;
 
   static List<HomeNavigationCard> get cards => const <HomeNavigationCard>[
@@ -19,7 +19,7 @@ class HomeNavigationCard extends StatelessWidget {
 
   const HomeNavigationCard.houses()
       : _title = "Houses",
-        _imagePath = AppIcons.castle_filled,
+        _icon = const AppIcon.castleFilled(),
         _routeName = AppRoutes.houses,
         super(
           key: const Key(""),
@@ -27,7 +27,7 @@ class HomeNavigationCard extends StatelessWidget {
 
   const HomeNavigationCard.elixirs()
       : _title = "Elixirs",
-        _imagePath = AppIcons.potion_filled,
+        _icon = const AppIcon.potionFilled(),
         _routeName = AppRoutes.elixirs,
         super(
           key: const Key(""),
@@ -35,7 +35,7 @@ class HomeNavigationCard extends StatelessWidget {
 
   const HomeNavigationCard.spells()
       : _title = "Spells",
-        _imagePath = AppIcons.magic_wand_filled,
+        _icon = const AppIcon.magicWandFilled(),
         _routeName = AppRoutes.spells,
         super(
           key: const Key(""),
@@ -43,7 +43,7 @@ class HomeNavigationCard extends StatelessWidget {
 
   const HomeNavigationCard.wizards()
       : _title = "Witches & Wizards",
-        _imagePath = AppIcons.wizard_hat_filled,
+        _icon = const AppIcon.wizardHatFilled(),
         _routeName = AppRoutes.wizards,
         super(
           key: const Key(""),
@@ -51,7 +51,7 @@ class HomeNavigationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: () {
         AppNavigator.pushNamed(
           context,
@@ -142,9 +142,7 @@ class HomeNavigationCard extends StatelessWidget {
                   ),
                   Align(
                     alignment: Alignment.bottomRight,
-                    child: Image.asset(
-                      _imagePath,
-                    ),
+                    child: _icon,
                   ),
                 ],
               ),

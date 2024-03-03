@@ -1,6 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
-import 'package:wizard_world/presentation/components/assets/app_icons.dart';
+import 'package:wizard_world/presentation/components/app_icon.dart';
 
 enum HouseElement {
   Air,
@@ -16,16 +16,16 @@ enum HouseElement {
     );
   }
 
-  String get imagePath {
+  AppIcon get icon {
     switch (this) {
       case HouseElement.Air:
-        return AppIcons.air_element;
+        return const AppIcon.airElement();
       case HouseElement.Water:
-        return AppIcons.water_element;
+        return const AppIcon.waterElement();
       case HouseElement.Earth:
-        return AppIcons.earth_element;
+        return const AppIcon.earthElement();
       case HouseElement.Fire:
-        return AppIcons.fire_element;
+        return const AppIcon.fireElement();
       case HouseElement.Unknown:
         throw UnimplementedError();
     }

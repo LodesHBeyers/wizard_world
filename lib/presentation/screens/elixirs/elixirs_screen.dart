@@ -81,7 +81,7 @@ class ElixirsScreen extends ConsumerWidget {
                       );
                     }
                     return Column(
-                      children: [
+                      children: <Widget>[
                         const Padding(
                           padding: EdgeInsets.symmetric(
                             horizontal: AppSizes.s,
@@ -98,10 +98,17 @@ class ElixirsScreen extends ConsumerWidget {
                             ],
                           ),
                         ),
+                        const SizedBox(
+                          height: AppSizes.xs,
+                        ),
+                        Divider(
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                          height: 1,
+                        ),
                         Expanded(
                           child: ListView.separated(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: AppSizes.s,
+                            padding: const EdgeInsets.all(
+                              AppSizes.s,
                             ),
                             itemCount: elixirs.length,
                             itemBuilder: (_, int index) {
