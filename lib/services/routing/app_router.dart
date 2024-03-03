@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:wizard_world/data/entities/elixir.dart';
 import 'package:wizard_world/data/entities/house.dart';
 import 'package:wizard_world/data/entities/wizard.dart';
+import 'package:wizard_world/presentation/screens/elixir/elixir_screen.dart';
 import 'package:wizard_world/presentation/screens/elixirs/elixirs_screen.dart';
 import 'package:wizard_world/presentation/screens/home/home_screen.dart';
 import 'package:wizard_world/presentation/screens/house/house_screen.dart';
@@ -28,6 +30,8 @@ class AppRouter {
         return _house(settings);
       case AppRoutes.wizard:
         return _wizard(settings);
+      case AppRoutes.elixir:
+        return _elixir(settings);
       default:
         return _unkownRoute(settings);
     }
@@ -80,6 +84,13 @@ class AppRouter {
       MaterialPageRoute<UnknownRoute>(
         builder: (BuildContext context) => WizardScreen(
           wizard: settings.arguments as Wizard,
+        ),
+      );
+
+  static MaterialPageRoute<Widget> _elixir(RouteSettings settings) =>
+      MaterialPageRoute<UnknownRoute>(
+        builder: (BuildContext context) => ElixirScreen(
+          elixir: settings.arguments as Elixir,
         ),
       );
 }

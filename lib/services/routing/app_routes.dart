@@ -6,4 +6,5 @@ class AppRoutes {
   static const String elixirs = "/elixirs";
   static const String house = "/house";
   static const String wizard = "/wizard";
+  static const String elixir = "/elixir";
 }
