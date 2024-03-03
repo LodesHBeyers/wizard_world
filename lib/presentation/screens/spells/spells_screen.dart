@@ -3,8 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wizard_world/data/entities/spell.dart';
 import 'package:wizard_world/data/notifiers/spells/spell_type_filter_notiifer.dart';
 import 'package:wizard_world/data/notifiers/spells/spells_notifier.dart';
+import 'package:wizard_world/data/notifiers/spells/spells_searchable_notifier.dart';
 import 'package:wizard_world/presentation/components/app_bar/styled_app_bar.dart';
 import 'package:wizard_world/presentation/components/loaders/animated_loader.dart';
+import 'package:wizard_world/presentation/modals/searchable_modal.dart';
 import 'package:wizard_world/presentation/screens/spells/widgets/spell_card.dart';
 import 'package:wizard_world/presentation/screens/spells/widgets/spells_filter_button.dart';
 import 'package:wizard_world/utils/app_sizes.dart';
@@ -19,6 +21,30 @@ class SpellsScreen extends ConsumerWidget {
     return Scaffold(
       appBar: StyledAppBar(
         heading: "Spells",
+        actions: <Widget>[
+          IconButton(
+            onPressed: () {
+              showSearchableModal<Spell>(
+                context,
+                hintText: "Search spells",
+                provider: spellsSearchProvider,
+                itemBuilder: (p0, Spell spell) {
+                  return SpellCard(
+                    name: spell.name,
+                    color: spell.light.color,
+                    effect: spell.effect,
+                    light: spell.light,
+                    incantation: spell.incantation,
+                    type: spell.type.localizedValue,
+                  );
+                },
+              );
+            },
+            icon: const Icon(
+              Icons.search,
+            ),
+          ),
+        ],
       ),
       body: Column(
         children: <Widget>[
