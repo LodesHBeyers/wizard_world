@@ -16,12 +16,25 @@ class ElixirsNotifier
 
   Future<List<Elixir>> loadElixirs() async {
     try {
-      // wait the ingredients list to load for the filters
-      await ref.read(ingredientsProvider.notifier).future;
-      return ref.read(elixirsRepositoryProvider).getQueriedElixirs(
-            ingredient: arg.ingredient?.name,
-            difficulty: arg.difficulty?.name,
-          );
+      // Wait the ingredients list to load for the filters
+      // This is not mission critical, absorb the exception
+      try {
+        await ref.read(ingredientsProvider.notifier).future;
+      } catch (e, s) {
+        handleException(
+          e,
+          s,
+          showMessage: false,
+        );
+      }
+      if (arg.difficulty != null || arg.ingredient != null) {
+        return ref.read(elixirsRepositoryProvider).getQueriedElixirs(
+              ingredient: arg.ingredient?.name,
+              difficulty: arg.difficulty?.name,
+            );
+      } else {
+        return ref.read(elixirsRepositoryProvider).getAllElixirs();
+      }
     } catch (e, s) {
       handleException(
         e,

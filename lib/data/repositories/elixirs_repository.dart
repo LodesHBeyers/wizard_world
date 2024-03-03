@@ -32,10 +32,6 @@ class ElixirsRepository extends CachedRepository<Elixir> {
     String? inventorFullName,
     String? manufacturer,
   }) async {
-    // Populated cache
-    if (ingredient == null && difficulty == null && cache.isEmpty) {
-      getAllElixirs();
-    }
     if (cache.isNotEmpty) {
       return cache.where(
         (Elixir element) {

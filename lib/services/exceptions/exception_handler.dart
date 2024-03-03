@@ -7,6 +7,7 @@ mixin ExceptionHandler {
     Object e,
     StackTrace s, {
     String? userMessage,
+    bool showMessage = true,
   }) {
     if (kDebugMode) {
       print(
@@ -15,8 +16,9 @@ mixin ExceptionHandler {
     } else {
       // Insert Firebase crashlytics etc here
     }
-
-    AppSnackBar.show(message: userMessage ?? _formatException(e));
+    if (showMessage) {
+      AppSnackBar.show(message: userMessage ?? _formatException(e));
+    }
   }
 
   static String _formatException(Object e) {

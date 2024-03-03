@@ -13,12 +13,17 @@ class SpellsNotifier extends FamilyAsyncNotifier<List<Spell>, SpellType?>
   }
 
   Future<List<Spell>> loadSpells() {
-    if (arg != null) {
-      return ref.read(spellsRepositoryProvider).getQueriedSpells(
-            type: arg!.name,
-          );
+    try {
+      if (arg != null) {
+        return ref.read(spellsRepositoryProvider).getQueriedSpells(
+              type: arg!.name,
+            );
+      }
+      return ref.read(spellsRepositoryProvider).getAllSpells();
+    } catch (e, s) {
+      handleException(e, s);
+      rethrow;
     }
-    return ref.read(spellsRepositoryProvider).getAllSpells();
   }
 }
 
