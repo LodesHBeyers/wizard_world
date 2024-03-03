@@ -10,7 +10,7 @@ import 'package:wizard_world/utils/app_sizes.dart';
 class HousesScreen extends ConsumerWidget {
   const HousesScreen({super.key});
 
-  final String hogwartsHousesInfo =
+  final String _hogwartsHousesInfo =
       "Hogwarts School of Witchcraft and Wizardry was divided into four Houses: Gryffindor, founded by Godric Gryffindor; Hufflepuff, founded by Helga Hufflepuff; Ravenclaw, founded by Rowena Ravenclaw; and Slytherin, founded by Salazar Slytherin.";
 
   @override
@@ -30,7 +30,7 @@ class HousesScreen extends ConsumerWidget {
               AppSizes.s,
             ),
             child: Text(
-              hogwartsHousesInfo,
+              _hogwartsHousesInfo,
               style: Theme.of(context).textTheme.titleMedium,
               textAlign: TextAlign.center,
             ),

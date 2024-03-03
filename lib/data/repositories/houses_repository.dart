@@ -1,22 +1,21 @@
 import 'package:riverpod/riverpod.dart';
 import 'package:wizard_world/data/entities/house.dart';
+import 'package:wizard_world/data/repositories/cached_repository.dart';
 import 'package:wizard_world/services/network/api_client.dart';
 import 'package:wizard_world/services/network/app_dio.dart';
 
-class HousesRepository {
+class HousesRepository extends CachedRepository<House> {
   final APIClient _apiClient;
   HousesRepository(
     this._apiClient,
   );
 
-  final List<House> _cache = <House>[];
-
   Future<List<House>> getAllHouses() async {
-    if (_cache.isNotEmpty) {
-      return _cache;
+    if (cache.isNotEmpty) {
+      return cache;
     }
     final List<House> allHouses = await _apiClient.fetchHouses();
-    _cache.addAll(
+    updateCache(
       allHouses,
     );
     return allHouses;
@@ -25,8 +24,8 @@ class HousesRepository {
   Future<House> getHouse(
     String id,
   ) async {
-    if (_cache.isNotEmpty && _cache.any((House element) => element.id == id)) {
-      return _cache.firstWhere((House element) => element.id == id);
+    if (cache.isNotEmpty && cache.any((House element) => element.id == id)) {
+      return cache.firstWhere((House element) => element.id == id);
     }
     return _apiClient.fetchHouse(
       id: id,
