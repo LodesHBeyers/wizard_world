@@ -17,4 +17,5 @@ class AppIcons{
   static const String ghost = "assets/icons/ic_ghost.png";
   static const String couch = "assets/icons/ic_couch.png";
   static const String cauldron_filled = "assets/icons/ic_cauldron_filled.png";
+  static const String emptyMagnifyingGlass = "assets/icons/ic_empty_magnifying_glass.png";
 }
