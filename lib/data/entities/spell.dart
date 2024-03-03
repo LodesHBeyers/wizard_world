@@ -25,9 +25,9 @@ class Spell {
   factory Spell.fromJson(Map<String, dynamic> json) {
     return Spell(
       id: json["id"],
-      name: json["name"],
-      incantation: json["incantation"],
-      effect: json["effect"],
+      name: json["name"] ?? "",
+      incantation: json["incantation"] ?? "",
+      effect: json["effect"] ?? "",
       canBeVerbal: json["canBeVerbal"] ?? false,
       type: SpellType.parse(
         json["type"],
@@ -35,7 +35,7 @@ class Spell {
       light: SpellLight.parse(
         json["light"],
       ),
-      creator: json["creator"],
+      creator: json["creator"] ?? "",
     );
   }
 }
