@@ -49,6 +49,7 @@ class HomeScreen extends ResponsiveLayout {
   @override
   Widget buildDesktop(BuildContext context) {
     return Scaffold(
+      endDrawer: const HomeDrawer(),
       appBar: StyledAppBar(
         heading: "Home",
         actions: <Widget>[
