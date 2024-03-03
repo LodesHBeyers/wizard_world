@@ -12,7 +12,7 @@ class Elixir {
   final ElixirDifficulty difficulty;
   final List<Ingredient> ingredients;
   final List<Wizard> inventors;
-  final String? manufacturer;
+  final String manufacturer;
 
   const Elixir({
     required this.id,
