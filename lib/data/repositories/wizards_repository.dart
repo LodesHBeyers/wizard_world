@@ -24,8 +24,35 @@ class WizardsRepository extends CachedRepository<Wizard> {
   Future<List<Wizard>> getQueriedWizards({
     String? firstName,
     String? lastName,
-  }) {
-    return _apiClient.fetchWizards();
+  }) async {
+    final List<Wizard> allWizards;
+    if (cache.isNotEmpty) {
+      allWizards = cache;
+    } else {
+      allWizards = await getAllWizards();
+    }
+
+    return allWizards.where((Wizard wizard) {
+      bool match = false;
+      if (firstName != null) {
+        match = wizard.firstName.toLowerCase().contains(
+              firstName.toLowerCase(),
+            );
+        if (match) {
+          return true;
+        }
+      }
+      if (lastName != null) {
+        match = wizard.lastName.toLowerCase().contains(
+              lastName.toLowerCase(),
+            );
+
+        if (match) {
+          return true;
+        }
+      }
+      return false;
+    }).toList();
   }
 
   Future<Wizard> getWizard(
@@ -33,16 +60,18 @@ class WizardsRepository extends CachedRepository<Wizard> {
   ) async {
     final Wizard wizard;
     if (cache.isNotEmpty) {
-      wizard =
-          cache.firstWhere((Wizard element) => element.id == id, orElse: () {
-        throw DioException(
-          requestOptions: RequestOptions(),
-          response: Response(
+      wizard = cache.firstWhere(
+        (Wizard element) => element.id == id,
+        orElse: () {
+          throw DioException(
             requestOptions: RequestOptions(),
-            statusCode: 404,
-          ),
-        );
-      });
+            response: Response<dynamic>(
+              requestOptions: RequestOptions(),
+              statusCode: 404,
+            ),
+          );
+        },
+      );
     } else {
       wizard = await _apiClient.fetchWizard(
         id: id,

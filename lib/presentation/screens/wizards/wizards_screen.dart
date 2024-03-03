@@ -2,11 +2,14 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wizard_world/data/entities/elixir.dart';
 import 'package:wizard_world/data/entities/wizard.dart';
 import 'package:wizard_world/data/notifiers/wizards/wizards_notifier.dart';
+import 'package:wizard_world/data/notifiers/wizards/wizards_searchable_notifier.dart';
 import 'package:wizard_world/presentation/components/app_bar/styled_app_bar.dart';
 import 'package:wizard_world/presentation/components/error_container.dart';
 import 'package:wizard_world/presentation/components/loaders/animated_loader.dart';
+import 'package:wizard_world/presentation/modals/searchable_modal.dart';
 import 'package:wizard_world/presentation/screens/wizards/widgets/wizard_card.dart';
 import 'package:wizard_world/services/routing/app_navigator.dart';
 import 'package:wizard_world/services/routing/app_routes.dart';
@@ -25,6 +28,35 @@ class WizardsScreen extends ConsumerWidget {
     return Scaffold(
       appBar: StyledAppBar(
         heading: "Wizards",
+        actions: [
+          IconButton(
+            onPressed: () {
+              showSearchableModal<Wizard>(
+                context,
+                hintText: "Search spells",
+                provider: wizardsSearchProvider,
+                itemBuilder: (_, Wizard wizard) {
+                  return GestureDetector(
+                    onTap: () {
+                      AppNavigator.pop(context);
+                      AppNavigator.pushNamed(
+                        context,
+                        AppRoutes.wizard,
+                        args: wizard,
+                      );
+                    },
+                    child: WizardCard(
+                      fullName: wizard.fullName,
+                    ),
+                  );
+                },
+              );
+            },
+            icon: const Icon(
+              Icons.search,
+            ),
+          ),
+        ],
       ),
       body: Column(
         children: <Widget>[
