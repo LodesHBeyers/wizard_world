@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:wizard_world/services/modals/app_snack.dart';
+import 'package:wizard_world/presentation/modals/app_snack.dart';
 
 mixin ExceptionHandler {
   void handleException(
