@@ -33,8 +33,8 @@ class SpellsRepository extends CachedRepository<Spell> {
           bool match = false;
           if (name != null) {
             match = element.name.toLowerCase().contains(
-              name.toLowerCase(),
-            );
+                  name.toLowerCase(),
+                );
           }
           if (type != null) {
             match = element.type.name == type;

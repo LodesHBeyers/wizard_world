@@ -8,7 +8,6 @@ class ElixirDuration extends ElixirInfoBlock {
     required this.duration,
   });
 
-
   @override
   String get emptyString => "Unknown duration";
 

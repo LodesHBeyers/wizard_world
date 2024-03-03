@@ -7,7 +7,8 @@ import 'package:wizard_world/utils/app_sizes.dart';
 void showSearchableModal<T>(
   BuildContext context, {
   required String hintText,
-  required AutoDisposeAsyncNotifierProvider<SearchableNotifier<T>, List<T>> provider,
+  required AutoDisposeAsyncNotifierProvider<SearchableNotifier<T>, List<T>>
+      provider,
   required Widget Function(BuildContext, T) itemBuilder,
 }) =>
     showModalBottomSheet(

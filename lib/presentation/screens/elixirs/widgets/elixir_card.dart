@@ -31,9 +31,9 @@ class ElixirCard extends StatelessWidget {
                   Text(
                     name,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 1,
-                    ),
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 1,
+                        ),
                   ),
                   if (effect.isNotEmpty)
                     Text(

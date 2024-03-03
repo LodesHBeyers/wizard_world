@@ -23,11 +23,11 @@ class AppNavigator {
     );
   }
 
-  static void pop(BuildContext context){
+  static void pop(BuildContext context) {
     return Navigator.of(context).pop();
   }
 
-  static void openEndDrawer(BuildContext context){
+  static void openEndDrawer(BuildContext context) {
     return Scaffold.of(context).openEndDrawer();
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 // Generic for providing a debounced result set
 abstract class SearchableNotifier<T> extends AutoDisposeAsyncNotifier<List<T>> {
   Timer t = Timer(

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:wizard_world/data/entities/wizard.dart';
 import 'package:wizard_world/presentation/components/app_bar/styled_app_bar.dart';

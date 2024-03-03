@@ -12,5 +12,5 @@ abstract class CachedRepository<T> {
       );
   }
 
-  List<T> get cache => _cache; 
+  List<T> get cache => _cache;
 }
