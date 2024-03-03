@@ -3,10 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wizard_world/data/entities/elixir.dart';
 import 'package:wizard_world/data/notifiers/elixirs/elixir_filter_notifier.dart';
 import 'package:wizard_world/data/notifiers/elixirs/elixirs_notifier.dart';
+import 'package:wizard_world/data/notifiers/elixirs/elixirs_searchable_notifier.dart';
 import 'package:wizard_world/presentation/components/app_bar/styled_app_bar.dart';
 import 'package:wizard_world/presentation/components/error_container.dart';
 import 'package:wizard_world/presentation/components/loaders/animated_loader.dart';
 import 'package:wizard_world/presentation/components/not_found_container.dart';
+import 'package:wizard_world/presentation/modals/searchable_modal.dart';
 import 'package:wizard_world/presentation/screens/elixirs/widgets/elixir_card.dart';
 import 'package:wizard_world/presentation/screens/elixirs/widgets/elixirs_filter_buttons.dart';
 import 'package:wizard_world/services/routing/app_navigator.dart';
@@ -24,6 +26,37 @@ class ElixirsScreen extends ConsumerWidget {
     return Scaffold(
       appBar: StyledAppBar(
         heading: "Elixirs",
+        actions: <Widget>[
+          IconButton(
+            onPressed: () {
+              showSearchableModal<Elixir>(
+                context,
+                hintText: "Search spells",
+                provider: elixirsSearchProvider,
+                itemBuilder: (_, Elixir elixir) {
+                  return GestureDetector(
+                    onTap: () {
+                      AppNavigator.pop(context);
+                      AppNavigator.pushNamed(
+                        context,
+                        AppRoutes.elixir,
+                        args: elixir.id,
+                      );
+                    },
+                    child: ElixirCard(
+                      name: elixir.name,
+                      effect: elixir.effect,
+                      difficulty: elixir.difficulty.localizedValue,
+                    ),
+                  );
+                },
+              );
+            },
+            icon: const Icon(
+              Icons.search,
+            ),
+          ),
+        ],
       ),
       body: Column(
         children: <Widget>[
@@ -101,7 +134,10 @@ class ElixirsScreen extends ConsumerWidget {
                   error: (Object e, StackTrace s) => ErrorContainer(
                     text: "Blimey! Something went wrong fetching the elixirs.",
                     onRetry: () {
-                      ref.read(elixirsProvider(ref.watch(elixirFilterProvider)).notifier).refresh();
+                      ref
+                          .read(elixirsProvider(ref.watch(elixirFilterProvider))
+                              .notifier)
+                          .refresh();
                     },
                   ),
                   loading: () => const Center(

@@ -32,14 +32,21 @@ class ElixirsRepository extends CachedRepository<Elixir> {
     String? inventorFullName,
     String? manufacturer,
   }) async {
+    // Populated cache
+    if (ingredient == null && difficulty == null && cache.isEmpty) {
+      getAllElixirs();
+    }
     if (cache.isNotEmpty) {
       return cache.where(
         (Elixir element) {
           bool match = false;
           if (name != null) {
-            match = element.name.contains(
-              name,
-            );
+            match = element.name.toLowerCase().contains(
+                  name.toLowerCase().trim(),
+                );
+            print("${element.name.toLowerCase().contains(
+                  name.toLowerCase().trim(),
+                )}");
           }
           if (difficulty != null) {
             match = element.difficulty.name == difficulty;
