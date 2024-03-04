@@ -50,7 +50,7 @@ class ElixirCard extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             letterSpacing: .35,
                           ),
-                      children: [
+                      children: <TextSpan>[
                         TextSpan(
                           text: " difficulty",
                           style: Theme.of(context)

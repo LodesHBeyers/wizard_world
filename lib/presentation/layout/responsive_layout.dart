@@ -8,12 +8,14 @@ abstract class ResponsiveLayout extends StatelessWidget {
 
   Widget buildDesktop(BuildContext context);
 
+  static const double mobileMaxWidth = 800;
+
   @nonVirtual
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
-        if (constraints.maxWidth < 800) {
+        if (constraints.maxWidth < mobileMaxWidth) {
           return buildMobile(context);
         }
         return buildDesktop(context);

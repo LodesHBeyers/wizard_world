@@ -16,7 +16,7 @@ class ErrorContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [
+      children: <Widget>[
         const AppIcon.ghost(),
         Padding(
           padding: const EdgeInsets.only(

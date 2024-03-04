@@ -32,7 +32,7 @@ class HousesScreen extends ResponsiveLayout {
             heading: "Houses",
           ),
           body: Column(
-            children: [
+            children: <Widget>[
               Padding(
                 padding: const EdgeInsets.all(
                   AppSizes.s,

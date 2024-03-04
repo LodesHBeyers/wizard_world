@@ -24,7 +24,7 @@ class HouseCard extends StatelessWidget {
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
+        children: <Widget>[
           Text(
             house.name,
             style: const TextStyle(

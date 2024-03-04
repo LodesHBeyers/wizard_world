@@ -13,7 +13,7 @@ class NotFoundContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [
+      children: <Widget>[
         const AppIcon.emptyMagnifyingGlass(),
         Padding(
           padding: const EdgeInsets.only(

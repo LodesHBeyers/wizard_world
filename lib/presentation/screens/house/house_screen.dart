@@ -99,7 +99,7 @@ class HouseScreen extends ResponsiveLayout {
                                   runSpacing: AppSizes.xs,
                                   spacing: AppSizes.xs,
                                   alignment: WrapAlignment.center,
-                                  children: [
+                                  children: <Widget>[
                                     for (Trait trait in house.traits)
                                       HouseTraitChip(
                                         name: trait.name.name,
@@ -181,7 +181,7 @@ class HouseScreen extends ResponsiveLayout {
                               runSpacing: AppSizes.xs,
                               spacing: AppSizes.xs,
                               alignment: WrapAlignment.center,
-                              children: [
+                              children: <Widget>[
                                 for (Trait trait in house.traits)
                                   HouseTraitChip(
                                     name: trait.name.name,

@@ -39,7 +39,7 @@ class WizardScreen extends ConsumerWidget {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
+          children: <Widget>[
             WizardPicture(
               fullName: wizard.fullName,
             ),
@@ -104,7 +104,7 @@ class WizardScreen extends ConsumerWidget {
                                 );
                               },
                               child: Row(
-                                children: [
+                                children: <Widget>[
                                   Text(
                                     "${wizard.elixirs.length > 1 ? "· " : ""}${elixir.name}",
                                     style: Theme.of(context)

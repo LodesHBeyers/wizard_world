@@ -69,7 +69,7 @@ class HouseQuickInfo extends StatelessWidget {
               AppSizes.xs,
             ),
             gradient: LinearGradient(
-              colors: [
+              colors: <Color>[
                 for (Color color in houseColorsArray) color.withOpacity(.8)
               ],
               stops: const <double>[

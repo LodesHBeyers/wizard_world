@@ -64,7 +64,7 @@ class HomeNavigationCard extends StatelessWidget {
         ),
         clipBehavior: Clip.hardEdge,
         child: Stack(
-          children: [
+          children: <Widget>[
             Positioned(
               top: -45,
               left: -25,
@@ -132,7 +132,7 @@ class HomeNavigationCard extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
+                children: <Widget>[
                   Text(
                     _title,
                     style: const TextStyle(

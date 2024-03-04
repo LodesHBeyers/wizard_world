@@ -19,7 +19,7 @@ class SpellsFilterButton extends ConsumerWidget {
           context,
           title: "Spell types",
           child: ListView(
-            children: [
+            children: <Widget>[
               ListTile(
                 onTap: () {
                   ref
@@ -61,11 +61,11 @@ class SpellsFilterButton extends ConsumerWidget {
         );
       },
       child: Row(
-        children: [
+        children: <Widget>[
           Text(
             "Type: ${filterValue == null ? "All" : filterValue.localizedValue}",
           ),
-          Icon(
+          const Icon(
             Icons.arrow_drop_down,
           ),
         ],

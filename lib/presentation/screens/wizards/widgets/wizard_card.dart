@@ -18,7 +18,7 @@ class WizardCard extends StatelessWidget {
           AppSizes.s,
         ),
         child: Row(
-          children: [
+          children: <Widget>[
             SearchedImage.circular(
               query: fullName,
               diameter: 40,

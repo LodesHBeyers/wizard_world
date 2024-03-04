@@ -10,7 +10,7 @@ class HomeDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: Column(
-        children: [
+        children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(
               AppSizes.s,

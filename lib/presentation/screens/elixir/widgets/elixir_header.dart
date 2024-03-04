@@ -40,7 +40,7 @@ class ElixirHeader extends StatelessWidget {
                       color: Theme.of(context).colorScheme.primary,
                     ),
               ),
-              if (characteristics.isNotEmpty) ...[
+              if (characteristics.isNotEmpty) ...<Widget>[
                 Text(
                   "Characteristics:",
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
