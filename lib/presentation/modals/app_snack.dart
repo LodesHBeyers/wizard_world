@@ -41,7 +41,9 @@ class AppSnackBar {
                 .textTheme
                 .labelLarge
                 ?.copyWith(
-                  color: Colors.white,
+                  color: Theme.of(globalNavigatorKey.currentContext!)
+                      .colorScheme
+                      .inversePrimary,
                 ),
           ),
           duration: duration,
