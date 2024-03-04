@@ -22,7 +22,7 @@ class HomeNavigationCard extends StatelessWidget {
         _icon = const AppIcon.castleFilled(),
         _routeName = AppRoutes.houses,
         super(
-          key: const Key(""),
+          key: const Key("HomeNavigationCard_houses"),
         );
 
   const HomeNavigationCard.elixirs()
@@ -30,7 +30,7 @@ class HomeNavigationCard extends StatelessWidget {
         _icon = const AppIcon.potionFilled(),
         _routeName = AppRoutes.elixirs,
         super(
-          key: const Key(""),
+          key: const Key("HomeNavigationCard_elixirs"),
         );
 
   const HomeNavigationCard.spells()
@@ -38,7 +38,7 @@ class HomeNavigationCard extends StatelessWidget {
         _icon = const AppIcon.magicWandFilled(),
         _routeName = AppRoutes.spells,
         super(
-          key: const Key(""),
+          key: const Key("HomeNavigationCard_spells"),
         );
 
   const HomeNavigationCard.wizards()
@@ -46,7 +46,7 @@ class HomeNavigationCard extends StatelessWidget {
         _icon = const AppIcon.wizardHatFilled(),
         _routeName = AppRoutes.wizards,
         super(
-          key: const Key(""),
+          key: const Key("HomeNavigationCard_wizards"),
         );
 
   @override

@@ -304,6 +304,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.0"
+  given_when_then:
+    dependency: "direct main"
+    description:
+      name: given_when_then
+      sha256: c518b4e85d9b8eb4d667374cdf3620c0962188d67652b4a7aae3de8f15fd0dc0
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.0"
   glob:
     dependency: transitive
     description:
@@ -741,14 +749,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.4"
-  widget_test_harness:
-    dependency: "direct main"
-    description:
-      name: widget_test_harness
-      sha256: "3f0896ee8f1678dda53cc41f4e438e4d5827b594071fa8abfa55fcd95774aba2"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.7.5"
   yaml:
     dependency: transitive
     description:

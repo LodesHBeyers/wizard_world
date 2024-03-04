@@ -81,16 +81,10 @@ class WizardsScreen extends ResponsiveLayout {
               Expanded(
                 child: ref.watch(wizardsProvider).when(
                       data: (List<Wizard> wizards) {
-                        final Set<Wizard> randomWizards = <Wizard>{};
-
-                        while (randomWizards.length < 3) {
-                          final int next = Random().nextInt(wizards.length - 1);
-                          randomWizards.add(
-                            wizards[next],
-                          );
-                        }
-
-                        for (int i = 0; i < wizards.length; i++) {}
+                        // Purposely done in the build
+                        // This will refresh to provide new wizards
+                        final List<Wizard> randomWizards =
+                            wizards.randomWizards;
 
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -217,17 +211,10 @@ class WizardsScreen extends ResponsiveLayout {
                         return Expanded(
                           child: ref.watch(wizardsProvider).when(
                                 data: (List<Wizard> wizards) {
-                                  final Set<Wizard> randomWizards = <Wizard>{};
-
-                                  while (randomWizards.length < 3) {
-                                    final int next =
-                                        Random().nextInt(wizards.length - 1);
-                                    randomWizards.add(
-                                      wizards[next],
-                                    );
-                                  }
-
-                                  for (int i = 0; i < wizards.length; i++) {}
+                                  // Purposely done in the build
+                                  // This will refresh to provide new wizards
+                                  final List<Wizard> randomWizards =
+                                      wizards.randomWizards;
 
                                   return Column(
                                     crossAxisAlignment:
@@ -387,7 +374,7 @@ class WizardsScreen extends ResponsiveLayout {
                                                     );
                                                   },
                                                   child: Row(
-                                                    children: [
+                                                    children: <Widget>[
                                                       Text(
                                                         "${selectedWizard.value!.elixirs.length > 1 ? "· " : ""}${elixir.name}",
                                                         style: Theme.of(context)
@@ -442,5 +429,22 @@ class WizardsScreen extends ResponsiveLayout {
         );
       },
     );
+  }
+}
+
+extension on List<Wizard> {
+  List<Wizard> get randomWizards {
+    if (length > 3) {
+      final Set<Wizard> randoms = <Wizard>{};
+      while (randomWizards.length < 3) {
+        final int next = Random().nextInt(length - 1);
+        randoms.add(
+          this[next],
+        );
+      }
+      return randoms.toList();
+    } else {
+      return this;
+    }
   }
 }

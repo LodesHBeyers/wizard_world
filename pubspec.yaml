@@ -20,8 +20,8 @@ dependencies:
   flutter_tts: ^3.8.5
   universal_html: ^2.2.4
   flutter_hooks: ^0.20.5
-  widget_test_harness: ^0.7.5
   mockito: ^5.4.4
+  given_when_then: ^0.2.0
 
 dev_dependencies:
   flutter_test:
