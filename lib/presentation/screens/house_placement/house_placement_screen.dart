@@ -149,7 +149,7 @@ class HousePlacementScreen extends ResponsiveLayout {
         LayoutBuilder(
           builder: (_, BoxConstraints constraints) {
             return SizedBox(
-              width: constraints.maxWidth *.66,
+              width: constraints.maxWidth * .66,
               child: Consumer(
                 builder: (_, WidgetRef ref, __) {
                   // Listen to changes and update a variable for the animated switcher to do
@@ -206,8 +206,9 @@ class HousePlacementScreen extends ResponsiveLayout {
                                 ),
                                 child: Text(
                                   "${house.name}!!!",
-                                  style:
-                                      Theme.of(context).textTheme.headlineMedium,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineMedium,
                                 ),
                               ),
                               GestureDetector(

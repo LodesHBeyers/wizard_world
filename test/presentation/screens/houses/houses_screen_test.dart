@@ -174,7 +174,8 @@ void main() {
 
           await when.pumpAndSettle();
 
-          await then.goldensVerifiedForDesktop("houses_screen_house_ui_on_right");
+          await then
+              .goldensVerifiedForDesktop("houses_screen_house_ui_on_right");
         },
       ),
     );

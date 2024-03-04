@@ -8,7 +8,7 @@ class HouseCard extends StatelessWidget {
   const HouseCard({
     super.key,
     required this.house,
-  }): super();
+  }) : super();
 
   @override
   Widget build(BuildContext context) {

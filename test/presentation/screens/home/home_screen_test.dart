@@ -33,7 +33,7 @@ void main() {
       },
     ),
   );
-  
+
   testGoldens(
     "Given HomeScreen When settings icons tapped Then display settings end drawer",
     testHarness(

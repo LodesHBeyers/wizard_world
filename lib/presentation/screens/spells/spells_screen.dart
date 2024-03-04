@@ -53,7 +53,9 @@ class SpellsScreen extends ConsumerWidget {
         builder: (_, BoxConstraints constraints) {
           return Center(
             child: SizedBox(
-              width: constraints.maxWidth > ResponsiveLayout.mobileMaxWidth ? constraints.maxWidth *.66 : constraints.maxWidth,
+              width: constraints.maxWidth > ResponsiveLayout.mobileMaxWidth
+                  ? constraints.maxWidth * .66
+                  : constraints.maxWidth,
               child: Column(
                 children: <Widget>[
                   Padding(
@@ -89,8 +91,9 @@ class SpellsScreen extends ConsumerWidget {
                                   ),
                                 ),
                                 Divider(
-                                  color:
-                                      Theme.of(context).colorScheme.inversePrimary,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .inversePrimary,
                                   height: 1,
                                 ),
                                 Expanded(

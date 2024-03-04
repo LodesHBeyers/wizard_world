@@ -22,7 +22,7 @@ void main() {
     ),
   );
 
-   testGoldens(
+  testGoldens(
     "Given HomeNavigationCard.wizards When rendered Then display correct UI",
     testHarness(
       (
@@ -39,7 +39,7 @@ void main() {
     ),
   );
 
-   testGoldens(
+  testGoldens(
     "Given HomeNavigationCard.spells When rendered Then display correct UI",
     testHarness(
       (
@@ -56,7 +56,7 @@ void main() {
     ),
   );
 
-   testGoldens(
+  testGoldens(
     "Given HomeNavigationCard.elixirs When rendered Then display correct UI",
     testHarness(
       (

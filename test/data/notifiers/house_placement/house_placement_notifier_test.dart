@@ -334,7 +334,9 @@ void main() {
                   "“Or perhaps in Slytherin, You'll make your real friends, Those cunning folk use any means, To achieve their ends.”",
             ),
             HousePlacementState.result(
-              house: container.read(housePlacementProvider.notifier).resultantHouse,
+              house: container
+                  .read(housePlacementProvider.notifier)
+                  .resultantHouse,
             ),
           ),
         ],

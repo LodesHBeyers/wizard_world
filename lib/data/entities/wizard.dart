@@ -16,7 +16,8 @@ class Wizard {
   factory Wizard.fromJson(Map<String, dynamic> json) {
     return Wizard(
       elixirs: <Elixir>[
-        for (Map<String, dynamic> elixirJson in json["elixirs"] ?? <Map<String, dynamic>>[])
+        for (Map<String, dynamic> elixirJson
+            in json["elixirs"] ?? <Map<String, dynamic>>[])
           Elixir.fromJson(
             elixirJson,
           ),
