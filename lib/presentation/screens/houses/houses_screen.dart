@@ -47,7 +47,7 @@ class HousesScreen extends ResponsiveLayout {
               housesState.when(
                 data: (List<House> houses) => Expanded(
                   child: Column(
-                    children: [
+                    children: <Widget>[
                       Expanded(
                         child: GridView.custom(
                           padding: const EdgeInsets.all(
@@ -86,14 +86,12 @@ class HousesScreen extends ResponsiveLayout {
                         ),
                         child: TextButton(
                           onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    HousePlacementScreen(houses: houses),
-                              ),
+                            AppNavigator.pushNamed(
+                              context,
+                              AppRoutes.placement,
                             );
                           },
-                          child: Text(
+                          child: const Text(
                             "Fancy a lookin'?",
                           ),
                         ),
@@ -129,88 +127,121 @@ class HousesScreen extends ResponsiveLayout {
           final ValueNotifier<House?> selectedHouse = useState(
             null,
           );
-          return Row(
-            children: <Widget>[
-              SizedBox(
-                width: (AppSizes.sw(context) - 2) * .5,
-                height: AppSizes.sh(context),
-                child: Consumer(
-                  builder: (_, WidgetRef ref, __) {
-                    final AsyncValue<List<House>> housesState = ref.watch(
-                      housesProvider,
-                    );
-
-                    return Column(
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.all(
-                            AppSizes.s,
-                          ),
-                          child: Text(
-                            _hogwartsHousesInfo,
-                            style: Theme.of(context).textTheme.titleMedium,
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        housesState.when(
-                          data: (List<House> houses) => Expanded(
-                            child: GridView.custom(
-                              padding: const EdgeInsets.all(
-                                AppSizes.l,
-                              ),
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                mainAxisSpacing: AppSizes.s,
-                                crossAxisSpacing: AppSizes.s,
-                                mainAxisExtent: AppSizes.sh(context) * .35,
-                              ),
-                              childrenDelegate: SliverChildListDelegate(
-                                <Widget>[
-                                  for (House house in houses)
-                                    GestureDetector(
-                                      key: Key(house.name),
-                                      onTap: () {
-                                        selectedHouse.value = house;
-                                      },
-                                      child: HouseCard(
-                                        house: house,
-                                      ),
-                                    ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          error: (Object e, StackTrace s) => ErrorContainer(
-                            text:
-                                "Blimey! Something went wrong fetches the houses.",
-                            onRetry: () {
-                              ref.read(housesProvider.notifier).refresh();
-                            },
-                          ),
-                          loading: () => const Center(
-                            child: AnimatedLoader(),
-                          ),
-                        ),
-                      ],
-                    );
-                  },
-                ),
-              ),
-              const VerticalDivider(
-                width: 1,
-              ),
-              SizedBox(
-                width: (AppSizes.sw(context) - 2) * .5,
-                height: AppSizes.sh(context),
-                child: selectedHouse.value != null
-                    ? HouseScreen(
-                        house: selectedHouse.value!,
-                      )
-                    : const Offstage(),
-              ),
-            ],
+          final ValueNotifier<bool> showPlacementScreen = useState(
+            false,
           );
+          return Consumer(builder: (_, WidgetRef ref, __) {
+            final AsyncValue<List<House>> housesState = ref.watch(
+              housesProvider,
+            );
+            return Row(
+              children: <Widget>[
+                SizedBox(
+                  width: (AppSizes.sw(context) - 2) * .5,
+                  height: AppSizes.sh(context),
+                  child: Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(
+                          AppSizes.s,
+                        ),
+                        child: Text(
+                          _hogwartsHousesInfo,
+                          style: Theme.of(context).textTheme.titleMedium,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      housesState.when(
+                        data: (List<House> houses) => Expanded(
+                          child: Column(
+                            children: [
+                              Expanded(
+                                child: GridView.custom(
+                                  padding: const EdgeInsets.all(
+                                    AppSizes.l,
+                                  ),
+                                  gridDelegate:
+                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    mainAxisSpacing: AppSizes.s,
+                                    crossAxisSpacing: AppSizes.s,
+                                    mainAxisExtent: AppSizes.sh(context) * .35,
+                                  ),
+                                  childrenDelegate: SliverChildListDelegate(
+                                    <Widget>[
+                                      for (House house in houses)
+                                        GestureDetector(
+                                          key: Key(house.name),
+                                          onTap: () {
+                                            selectedHouse.value = house;
+                                          },
+                                          child: HouseCard(
+                                            house: house,
+                                          ),
+                                        ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: AppSizes.s,
+                                ),
+                                child: TextButton(
+                                  onPressed: () {
+                                    selectedHouse.value = null;
+                                    showPlacementScreen.value = true;
+                                  },
+                                  child: const Text(
+                                    "Fancy a lookin'?",
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        error: (Object e, StackTrace s) => ErrorContainer(
+                          text:
+                              "Blimey! Something went wrong fetches the houses.",
+                          onRetry: () {
+                            ref.read(housesProvider.notifier).refresh();
+                          },
+                        ),
+                        loading: () => const Center(
+                          child: AnimatedLoader(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const VerticalDivider(
+                  width: 1,
+                ),
+                SizedBox(
+                  width: (AppSizes.sw(context) - 2) * .5,
+                  height: AppSizes.sh(context),
+                  child: Builder(
+                    builder: (BuildContext context) {
+                      if (selectedHouse.value != null) {
+                        return HouseScreen(
+                          house: selectedHouse.value!,
+                        );
+                      } else if (showPlacementScreen.value) {
+                        return HousePlacementScreen(
+                          onDesktopHousePlacement: (House value) {
+                            showPlacementScreen.value = false;
+                            selectedHouse.value = value;
+                          },
+                        );
+                      } else {
+                        return const Offstage();
+                      }
+                    },
+                  ),
+                ),
+              ],
+            );
+          });
         },
       ),
     );

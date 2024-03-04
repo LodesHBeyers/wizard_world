@@ -5,6 +5,7 @@ import 'package:wizard_world/presentation/screens/elixir/elixir_screen.dart';
 import 'package:wizard_world/presentation/screens/elixirs/elixirs_screen.dart';
 import 'package:wizard_world/presentation/screens/home/home_screen.dart';
 import 'package:wizard_world/presentation/screens/house/house_screen.dart';
+import 'package:wizard_world/presentation/screens/house_placement/house_placement_screen.dart';
 import 'package:wizard_world/presentation/screens/houses/houses_screen.dart';
 import 'package:wizard_world/presentation/screens/spells/spells_screen.dart';
 import 'package:wizard_world/presentation/screens/unkown_route.dart';
@@ -31,6 +32,8 @@ class AppRouter {
         return _wizard(settings);
       case AppRoutes.elixir:
         return _elixir(settings);
+      case AppRoutes.placement:
+        return _placement(settings);
       default:
         return _unkownRoute(settings);
     }
@@ -91,5 +94,10 @@ class AppRouter {
         builder: (BuildContext context) => ElixirScreen(
           id: settings.arguments as String,
         ),
+      );
+
+  static MaterialPageRoute<Widget> _placement(RouteSettings settings) =>
+      MaterialPageRoute<UnknownRoute>(
+        builder: (BuildContext context) => const HousePlacementScreen(),
       );
 }

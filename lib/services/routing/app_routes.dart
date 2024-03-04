@@ -7,4 +7,5 @@ class AppRoutes {
   static const String house = "/house";
   static const String wizard = "/wizard";
   static const String elixir = "/elixir";
+  static const String placement = "/placement";
 }

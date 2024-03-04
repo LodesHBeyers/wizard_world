@@ -6,11 +6,11 @@ import 'package:wizard_world/data/notifiers/houses/houses_notifier.dart';
 
 class HousePlacementNotifier extends AutoDisposeNotifier<HousePlacementState> {
   // 3 pools for pill selection
-  final List<MapEntry<House, Trait>> _traitsPool1 = [];
-  final List<MapEntry<House, Trait>> _traitsPool2 = [];
-  final List<MapEntry<House, Trait>> _traitsPool3 = [];
+  final List<MapEntry<House, Trait>> _traitsPool1 = <MapEntry<House, Trait>>[];
+  final List<MapEntry<House, Trait>> _traitsPool2 = <MapEntry<House, Trait>>[];
+  final List<MapEntry<House, Trait>> _traitsPool3 = <MapEntry<House, Trait>>[];
   // Used for logic flow
-  final List<MapEntry<House, Trait>> _selections = [];
+  final List<MapEntry<House, Trait>> _selections = <MapEntry<House, Trait>>[];
   @override
   HousePlacementState build() {
     populatedPools();
@@ -23,7 +23,7 @@ class HousePlacementNotifier extends AutoDisposeNotifier<HousePlacementState> {
   void populatedPools() {
     // This cannot be null atr this point, only entry path to placement is via a loaded houses screen
     final List<House> houses = ref.read(housesProvider).asData!.value;
-    final List<MapEntry<House, Trait>> allPool = [];
+    final List<MapEntry<House, Trait>> allPool = <MapEntry<House, Trait>>[];
 
     for (House house in houses) {
       allPool.addAll(
@@ -81,7 +81,7 @@ class HousePlacementNotifier extends AutoDisposeNotifier<HousePlacementState> {
     _selections.addAll(selections);
 
     if (_selections.length > 8) {
-      final Map<House, int> counts = {};
+      final Map<House, int> counts = <House, int>{};
       // Tally counts
       for (MapEntry<House, Trait> selection in selections) {
         int value = counts[selection.key] ?? 0;
