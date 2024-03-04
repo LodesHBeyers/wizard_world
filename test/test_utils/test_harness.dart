@@ -82,6 +82,16 @@ extension WhenExtension on WidgetTestWhen<UIWidgetTestHarness> {
     await tester.pumpAndSettle();
   }
 
+  Future<void> textTapped(String text) async {
+    await tester.tap(
+      find.textContaining(
+        text,
+        findRichText: true,
+      ),
+    );
+    await tester.pumpAndSettle();
+  }
+
   Future<void> pumpAndSettle() => tester.pumpAndSettle();
 }
 
