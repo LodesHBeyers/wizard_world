@@ -55,20 +55,6 @@ extension GivenExtension on WidgetTestGiven<UIWidgetTestHarness> {
         _ => const Size(800, 600),
       },
     );
-
-    await tester.pumpWidget(
-      ProviderScope(
-        overrides: overrides,
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: AppTheme.light,
-          darkTheme: AppTheme.dark,
-          themeMode: themeMode,
-          home: child,
-          onGenerateRoute: AppRouter.onGenerateRoute,
-        ),
-      ),
-    );
   }
 }
 
