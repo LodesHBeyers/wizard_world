@@ -8,6 +8,7 @@ import 'package:wizard_world/presentation/components/error_container.dart';
 import 'package:wizard_world/presentation/components/loaders/animated_loader.dart';
 import 'package:wizard_world/presentation/layout/responsive_layout.dart';
 import 'package:wizard_world/presentation/screens/house/house_screen.dart';
+import 'package:wizard_world/presentation/screens/house_placement/house_placement_screen.dart';
 import 'package:wizard_world/presentation/screens/houses/widgets/house_card.dart';
 import 'package:wizard_world/services/routing/app_navigator.dart';
 import 'package:wizard_world/services/routing/app_routes.dart';
@@ -45,35 +46,59 @@ class HousesScreen extends ResponsiveLayout {
               ),
               housesState.when(
                 data: (List<House> houses) => Expanded(
-                  child: GridView.custom(
-                    padding: const EdgeInsets.all(
-                      AppSizes.l,
-                    ),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: AppSizes.s,
-                      crossAxisSpacing: AppSizes.s,
-                      mainAxisExtent: 165,
-                    ),
-                    childrenDelegate: SliverChildListDelegate(
-                      <Widget>[
-                        for (House house in houses)
-                          GestureDetector(
-                            key: Key(house.name),
-                            onTap: () {
-                              AppNavigator.pushNamed(
-                                context,
-                                AppRoutes.house,
-                                args: house,
-                              );
-                            },
-                            child: HouseCard(
-                              house: house,
-                            ),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: GridView.custom(
+                          padding: const EdgeInsets.all(
+                            AppSizes.l,
                           ),
-                      ],
-                    ),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: AppSizes.s,
+                            crossAxisSpacing: AppSizes.s,
+                            mainAxisExtent: 165,
+                          ),
+                          childrenDelegate: SliverChildListDelegate(
+                            <Widget>[
+                              for (House house in houses)
+                                GestureDetector(
+                                  key: Key(house.name),
+                                  onTap: () {
+                                    AppNavigator.pushNamed(
+                                      context,
+                                      AppRoutes.house,
+                                      args: house,
+                                    );
+                                  },
+                                  child: HouseCard(
+                                    house: house,
+                                  ),
+                                ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: AppSizes.s,
+                        ),
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    HousePlacementScreen(houses: houses),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            "Fancy a lookin'?",
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 error: (Object e, StackTrace s) => ErrorContainer(
