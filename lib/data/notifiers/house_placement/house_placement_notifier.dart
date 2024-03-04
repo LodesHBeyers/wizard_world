@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:meta/meta.dart';
 import 'package:wizard_world/data/entities/house.dart';
 import 'package:wizard_world/data/entities/house_placemenet_state/house_placement_state.dart';
 import 'package:wizard_world/data/entities/trait.dart';
@@ -6,11 +7,38 @@ import 'package:wizard_world/data/notifiers/houses/houses_notifier.dart';
 
 class HousePlacementNotifier extends AutoDisposeNotifier<HousePlacementState> {
   // 3 pools for pill selection
-  final List<MapEntry<House, Trait>> _traitsPool1 = <MapEntry<House, Trait>>[];
-  final List<MapEntry<House, Trait>> _traitsPool2 = <MapEntry<House, Trait>>[];
-  final List<MapEntry<House, Trait>> _traitsPool3 = <MapEntry<House, Trait>>[];
-  // Used for logic flow
-  final List<MapEntry<House, Trait>> _selections = <MapEntry<House, Trait>>[];
+  @visibleForTesting
+  final List<MapEntry<House, Trait>> traitsPool1 = <MapEntry<House, Trait>>[];
+  @visibleForTesting
+  final List<MapEntry<House, Trait>> traitsPool2 = <MapEntry<House, Trait>>[];
+  @visibleForTesting
+  final List<MapEntry<House, Trait>> traitsPool3 = <MapEntry<House, Trait>>[];
+  // Used for logic flow and result House
+  @visibleForTesting
+  final List<MapEntry<House, Trait>> internalSelections =
+      <MapEntry<House, Trait>>[];
+
+  @visibleForTesting
+  House get resultantHouse {
+    final Map<House, int> counts = <House, int>{};
+    // Tally counts
+    for (MapEntry<House, Trait> selection in internalSelections) {
+      int value = counts[selection.key] ?? 0;
+      value++;
+      counts[selection.key] = value;
+    }
+    int maxCount = 0;
+    late House maxHouse;
+
+    counts.forEach((House key, int value) {
+      if (value > maxCount) {
+        maxHouse = key;
+      }
+    });
+
+    return maxHouse;
+  }
+
   @override
   HousePlacementState build() {
     populatedPools();
@@ -41,19 +69,19 @@ class HousePlacementNotifier extends AutoDisposeNotifier<HousePlacementState> {
 
     final int thirdCount = (allPool.length / 3).floor();
 
-    _traitsPool1.addAll(
+    traitsPool1.addAll(
       allPool.getRange(
         0,
         thirdCount,
       ),
     );
-    _traitsPool2.addAll(
+    traitsPool2.addAll(
       allPool.getRange(
         thirdCount,
         thirdCount * 2,
       ),
     );
-    _traitsPool3.addAll(
+    traitsPool3.addAll(
       allPool.getRange(
         thirdCount * 2,
         allPool.length,
@@ -63,9 +91,9 @@ class HousePlacementNotifier extends AutoDisposeNotifier<HousePlacementState> {
 
   void startSelection() {
     state = HousePlacementState.selection(
-      traitsPool: _traitsPool1,
+      traitsPool: traitsPool1,
       text:
-          "I see you're just and loyal, those are traits of Hufflepuff, but wait, I see something else, that seems to belong to Slytherin too",
+          "“I see you're just and loyal, those are traits of Hufflepuff, but wait, I see something else, that seems to belong to Slytherin too”",
     );
   }
 
@@ -74,31 +102,15 @@ class HousePlacementNotifier extends AutoDisposeNotifier<HousePlacementState> {
   ) {
     // If _selections is empty, previous set was pool1, use pool 2
     final List<MapEntry<House, Trait>> traitsToUse =
-        _selections.isEmpty ? _traitsPool2 : _traitsPool3;
-    String text = _selections.isEmpty
-        ? "You might belong in Gryffindor, Where dwell the brave at heart, Their daring, nerve, and chivalry, Set Gryffindors apart"
-        : "Or perhaps in Slytherin, You’ll make your real friends, Those cunning folk use any means, To achieve their ends.";
-    _selections.addAll(selections);
+        internalSelections.isEmpty ? traitsPool2 : traitsPool3;
+    String text = internalSelections.isEmpty
+        ? "“You might belong in Gryffindor, Where dwell the brave at heart, Their daring, nerve, and chivalry, Set Gryffindors apart”"
+        : "“Or perhaps in Slytherin, You'll make your real friends, Those cunning folk use any means, To achieve their ends.”";
+    internalSelections.addAll(selections);
 
-    if (_selections.length > 8) {
-      final Map<House, int> counts = <House, int>{};
-      // Tally counts
-      for (MapEntry<House, Trait> selection in selections) {
-        int value = counts[selection.key] ?? 0;
-        value++;
-        counts[selection.key] = value;
-      }
-      int maxCount = 0;
-      late House maxHouse;
-
-      counts.forEach((House key, int value) {
-        if (value > maxCount) {
-          maxHouse = key;
-        }
-      });
-
+    if (internalSelections.length > 8) {
       state = HousePlacementState.result(
-        house: maxHouse,
+        house: resultantHouse,
       );
       return;
     }
