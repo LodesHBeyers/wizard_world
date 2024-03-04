@@ -9,6 +9,7 @@ import 'package:wizard_world/presentation/components/app_bar/styled_app_bar.dart
 import 'package:wizard_world/presentation/components/error_container.dart';
 import 'package:wizard_world/presentation/components/loaders/animated_loader.dart';
 import 'package:wizard_world/presentation/layout/responsive_layout.dart';
+import 'package:wizard_world/presentation/screens/house/house_screen.dart';
 import 'package:wizard_world/presentation/screens/house/widgets/house_header.dart';
 import 'package:wizard_world/presentation/screens/house/widgets/house_quick_info.dart';
 import 'package:wizard_world/presentation/screens/house/widgets/house_trait_chip.dart';
@@ -65,6 +66,7 @@ class HousesScreen extends ResponsiveLayout {
                       <Widget>[
                         for (House house in houses)
                           GestureDetector(
+                            key: Key(house.name),
                             onTap: () {
                               AppNavigator.pushNamed(
                                 context,
@@ -148,6 +150,7 @@ class HousesScreen extends ResponsiveLayout {
                                 <Widget>[
                                   for (House house in houses)
                                     GestureDetector(
+                                      key: Key(house.name),
                                       onTap: () {
                                         selectedHouse.value = house;
                                       },
@@ -182,78 +185,8 @@ class HousesScreen extends ResponsiveLayout {
                 width: (AppSizes.sw(context) - 2) * .5,
                 height: AppSizes.sh(context),
                 child: selectedHouse.value != null
-                    ? SingleChildScrollView(
-                        child: Column(
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.all(
-                                AppSizes.s,
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  HouseHeader(
-                                    houseBadgeImagePath:
-                                        selectedHouse.value!.houseBadge,
-                                    houseHead:
-                                        selectedHouse.value!.heads.firstWhere(
-                                      (Wizard element) =>
-                                          element.fullName !=
-                                          selectedHouse.value!.founder,
-                                    ),
-                                    houseFounder:
-                                        selectedHouse.value!.heads.firstWhere(
-                                      (Wizard element) =>
-                                          element.fullName ==
-                                          selectedHouse.value!.founder,
-                                    ),
-                                  ),
-                                  Divider(
-                                    color: selectedHouse.value!.houseColor,
-                                    height: AppSizes.xxl,
-                                  ),
-                                  HouseQuickInfo(
-                                    houseColors:
-                                        selectedHouse.value!.houseColours,
-                                    houseColorsArray:
-                                        selectedHouse.value!.houseColorsArray,
-                                    animal: selectedHouse.value!.animal,
-                                    animalIcon: selectedHouse.value!.animalIcon,
-                                    element: selectedHouse.value!.element,
-                                    ghost: selectedHouse.value!.ghost,
-                                    commonRoom: selectedHouse.value!.commonRoom,
-                                  ),
-                                  Divider(
-                                    color: selectedHouse.value!.houseColor,
-                                    height: AppSizes.s,
-                                  ),
-                                  Text(
-                                    "Traits:",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium
-                                        ?.copyWith(
-                                          letterSpacing: 1,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                  ),
-                                  Wrap(
-                                    runSpacing: AppSizes.xs,
-                                    spacing: AppSizes.xs,
-                                    alignment: WrapAlignment.center,
-                                    children: <Widget>[
-                                      for (Trait trait
-                                          in selectedHouse.value!.traits)
-                                        HouseTraitChip(
-                                          name: trait.name.name,
-                                        ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
+                    ? HouseScreen(
+                        house: selectedHouse.value!,
                       )
                     : const Offstage(),
               ),

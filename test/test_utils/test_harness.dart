@@ -6,6 +6,11 @@ import 'package:wizard_world/presentation/theme/app_theme.dart';
 import 'package:wizard_world/services/routing/app_router.dart';
 import 'package:given_when_then/given_when_then.dart';
 
+enum TestScenario {
+  desktop,
+  mobile;
+}
+
 Future<void> Function(WidgetTester) testHarness(
   WidgetTestHarnessCallback<UIWidgetTestHarness> callback,
 ) {
@@ -26,9 +31,30 @@ extension GivenExtension on WidgetTestGiven<UIWidgetTestHarness> {
     Widget child, {
     ThemeMode themeMode = ThemeMode.light,
     List<Override> overrides = const <Override>[],
+    TestScenario? scenario,
   }) async {
     TestWidgetsFlutterBinding.ensureInitialized();
     await loadAppFonts();
+
+    await tester.pumpWidgetBuilder(
+      ProviderScope(
+        overrides: overrides,
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.light,
+          darkTheme: AppTheme.dark,
+          themeMode: themeMode,
+          home: child,
+          onGenerateRoute: AppRouter.onGenerateRoute,
+        ),
+      ),
+      surfaceSize: switch (scenario) {
+        TestScenario.mobile => const Size(400, 800),
+        TestScenario.desktop => const Size(1920, 1080),
+        // Default size
+        _ => const Size(800, 600),
+      },
+    );
 
     await tester.pumpWidget(
       ProviderScope(
@@ -75,8 +101,11 @@ extension WhenExtension on WidgetTestWhen<UIWidgetTestHarness> {
 
 extension ThenExtensions on WidgetTestThen<UIWidgetTestHarness> {
   Future<void> goldensVerified(
-    String scenario,
-  ) async {
+    String scenario, {
+    // Applicable where animation is involved.
+    // pumpAndSettle times out due to animation drawing frames
+    Future<void> Function(WidgetTester)? customPump,
+  }) async {
     GoldenToolkit.configuration.copyWith(
       enableRealShadows: true,
       defaultDevices: <Device>[
@@ -88,11 +117,60 @@ extension ThenExtensions on WidgetTestThen<UIWidgetTestHarness> {
       tester,
       "\\$scenario\\$scenario",
       autoHeight: true,
+      customPump: customPump,
       devices: <Device>[
         const Device(
           size: Size(400, 800),
           name: "phone",
         ),
+        const Device(
+          size: Size(1920, 1080),
+          name: "desktop",
+        ),
+      ],
+    );
+  }
+
+  Future<void> goldensVerifiedForMobile(
+    String scenario, {
+    // Applicable where animation is involved.
+    // pumpAndSettle times out due to animation drawing frames
+    Future<void> Function(WidgetTester)? customPump,
+  }) async {
+    GoldenToolkit.configuration.copyWith(
+      enableRealShadows: true,
+    );
+
+    await multiScreenGolden(
+      tester,
+      "\\$scenario\\$scenario",
+      autoHeight: true,
+      customPump: customPump,
+      devices: <Device>[
+        const Device(
+          size: Size(400, 800),
+          name: "phone",
+        ),
+      ],
+    );
+  }
+
+  Future<void> goldensVerifiedForDesktop(
+    String scenario, {
+    // Applicable where animation is involved.
+    // pumpAndSettle times out due to animation drawing frames
+    Future<void> Function(WidgetTester)? customPump,
+  }) async {
+    GoldenToolkit.configuration.copyWith(
+      enableRealShadows: true,
+    );
+
+    await multiScreenGolden(
+      tester,
+      "\\$scenario\\$scenario",
+      autoHeight: true,
+      customPump: customPump,
+      devices: <Device>[
         const Device(
           size: Size(1920, 1080),
           name: "desktop",

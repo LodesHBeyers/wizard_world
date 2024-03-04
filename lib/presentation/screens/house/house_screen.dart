@@ -5,14 +5,16 @@ import 'package:wizard_world/data/entities/trait.dart';
 import 'package:wizard_world/data/entities/wizard.dart';
 import 'package:wizard_world/data/notifiers/houses/house_notifier.dart';
 import 'package:wizard_world/presentation/components/app_bar/styled_app_bar.dart';
+import 'package:wizard_world/presentation/components/error_container.dart';
 import 'package:wizard_world/presentation/components/loaders/animated_loader.dart';
+import 'package:wizard_world/presentation/layout/responsive_layout.dart';
 import 'package:wizard_world/presentation/screens/house/widgets/house_header.dart';
 import 'package:wizard_world/presentation/screens/house/widgets/house_quick_info.dart';
 import 'package:wizard_world/presentation/screens/house/widgets/house_trait_chip.dart';
 import 'package:wizard_world/utils/app_sizes.dart';
 import 'package:wizard_world/utils/house_styles.dart';
 
-class HouseScreen extends ConsumerWidget {
+class HouseScreen extends ResponsiveLayout {
   final House house;
   const HouseScreen({
     super.key,
@@ -32,7 +34,7 @@ class HouseScreen extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget buildMobile(BuildContext context) {
     return Theme(
       data: Theme.of(context).copyWith(
         appBarTheme: AppBarTheme(
@@ -47,7 +49,91 @@ class HouseScreen extends ConsumerWidget {
         appBar: StyledAppBar(
           heading: house.name,
         ),
-        body: ref.watch(houseProvider(house.id)).when(
+        body: Consumer(
+          builder: (_, WidgetRef ref, __) {
+            return ref.watch(houseProvider(house.id)).when(
+                  data: (House house) {
+                    return SingleChildScrollView(
+                      child: Column(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(
+                              AppSizes.s,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                HouseHeader(
+                                  houseBadgeImagePath: house.houseBadge,
+                                  houseHead: _houseHead,
+                                  houseFounder: _houseFounder,
+                                ),
+                                Divider(
+                                  color: house.houseColor,
+                                  height: AppSizes.xxl,
+                                ),
+                                HouseQuickInfo(
+                                  houseColors: house.houseColours,
+                                  houseColorsArray: house.houseColorsArray,
+                                  animal: house.animal,
+                                  animalIcon: house.animalIcon,
+                                  element: house.element,
+                                  ghost: house.ghost,
+                                  commonRoom: house.commonRoom,
+                                ),
+                                Divider(
+                                  color: house.houseColor,
+                                  height: AppSizes.s,
+                                ),
+                                Text(
+                                  "Traits:",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.copyWith(
+                                        letterSpacing: 1,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                ),
+                                Wrap(
+                                  runSpacing: AppSizes.xs,
+                                  spacing: AppSizes.xs,
+                                  alignment: WrapAlignment.center,
+                                  children: [
+                                    for (Trait trait in house.traits)
+                                      HouseTraitChip(
+                                        name: trait.name.name,
+                                      ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                  error: (Object e, StackTrace s) => ErrorContainer(
+                    text: "",
+                    onRetry: () {
+                      ref.invalidate(houseProvider(house.id));
+                    },
+                  ),
+                  loading: () => const Center(
+                    child: AnimatedLoader(),
+                  ),
+                );
+          },
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget buildDesktop(BuildContext context) {
+    return Consumer(
+      builder: (_, WidgetRef ref, __) {
+        return ref.watch(houseProvider(house.id)).when(
               data: (House house) {
                 return SingleChildScrollView(
                   child: Column(
@@ -109,12 +195,17 @@ class HouseScreen extends ConsumerWidget {
                   ),
                 );
               },
-              error: (Object e, StackTrace s) => Text("ERROR"),
+              error: (Object e, StackTrace s) => ErrorContainer(
+                text: "",
+                onRetry: () {
+                  ref.invalidate(houseProvider(house.id));
+                },
+              ),
               loading: () => const Center(
                 child: AnimatedLoader(),
               ),
-            ),
-      ),
+            );
+      },
     );
   }
 }
