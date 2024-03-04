@@ -13,8 +13,8 @@ import 'package:wizard_world/presentation/screens/houses/houses_screen.dart';
 import 'package:wizard_world/presentation/screens/spells/spells_screen.dart';
 import 'package:wizard_world/presentation/screens/wizards/wizards_screen.dart';
 
-import '../../test_utils/manual_mocks/manual_mocks.dart';
-import '../../test_utils/test_harness.dart';
+import '../../../test_utils/manual_mocks/manual_mocks.dart';
+import '../../../test_utils/test_harness.dart';
 
 void main() {
   testGoldens(
