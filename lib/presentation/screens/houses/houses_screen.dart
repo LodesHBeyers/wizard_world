@@ -2,22 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wizard_world/data/entities/house.dart';
-import 'package:wizard_world/data/entities/trait.dart';
-import 'package:wizard_world/data/entities/wizard.dart';
 import 'package:wizard_world/data/notifiers/houses/houses_notifier.dart';
 import 'package:wizard_world/presentation/components/app_bar/styled_app_bar.dart';
 import 'package:wizard_world/presentation/components/error_container.dart';
 import 'package:wizard_world/presentation/components/loaders/animated_loader.dart';
 import 'package:wizard_world/presentation/layout/responsive_layout.dart';
 import 'package:wizard_world/presentation/screens/house/house_screen.dart';
-import 'package:wizard_world/presentation/screens/house/widgets/house_header.dart';
-import 'package:wizard_world/presentation/screens/house/widgets/house_quick_info.dart';
-import 'package:wizard_world/presentation/screens/house/widgets/house_trait_chip.dart';
 import 'package:wizard_world/presentation/screens/houses/widgets/house_card.dart';
 import 'package:wizard_world/services/routing/app_navigator.dart';
 import 'package:wizard_world/services/routing/app_routes.dart';
 import 'package:wizard_world/utils/app_sizes.dart';
-import 'package:wizard_world/utils/house_styles.dart';
 
 class HousesScreen extends ResponsiveLayout {
   const HousesScreen({super.key});
